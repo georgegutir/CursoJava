@@ -1,4 +1,4 @@
-package controladores;
+package supermercado.controladores;
 
 import java.io.IOException;
 
