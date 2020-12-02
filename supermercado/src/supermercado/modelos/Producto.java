@@ -98,6 +98,20 @@ public class Producto {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public BigDecimal getPrecioConDescuento() {
+		//return precio - precio * descuento / 100
+
+		if(descuento == null || descuento == 0) {
+			return null;
+		}
+
+		if(descuento == 100) {
+			return BigDecimal.ZERO;
+		}
+
+		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
+	}
 
 	@Override
 	public int hashCode() {
