@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import filmoteca.modelos.Producto;
 
-public class ProductoDaoTreeMap implements Dao<Producto>{
+public class ProductoDaoTreeMap implements Dao<Producto> {
 	
 	private static TreeMap<Long, Producto> productos = new TreeMap<>();
 	
@@ -39,32 +39,29 @@ public class ProductoDaoTreeMap implements Dao<Producto>{
 	
 	@Override
 	public Iterable<Producto> obtenerTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return productos.values();
 	}
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return productos.get(id);
 	}
 
 	@Override
-	public void crear(Producto objeto) {
-		// TODO Auto-generated method stub
-		
+	public void crear(Producto producto) {
+		Long id = productos.size() == 0 ? 1L : productos.lastKey() + 1L; //La 'L' se refiere a que es un Long para poder tener más capacidad
+		producto.setId(id);
+		productos.put(id, producto);
 	}
 
 	@Override
-	public void modificar(Producto objeto) {
-		// TODO Auto-generated method stub
-		
+	public void modificar(Producto producto) {
+		productos.put(producto.getId(), producto);
 	}
 
 	@Override
 	public void eliminar(Long id) {
-		// TODO Auto-generated method stub
-		
+		productos.remove(id);
 	}
 
 }

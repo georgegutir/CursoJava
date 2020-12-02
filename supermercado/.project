@@ -34,11 +34,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>WebContent/css/all.min.css</name>
-			<type>1</type>
-			<location>C:/Users/JORGE/git/CursoJava/filmoteca/WebContent/css/all.min.css</location>
-		</link>
-	</linkedResources>
 </projectDescription>
