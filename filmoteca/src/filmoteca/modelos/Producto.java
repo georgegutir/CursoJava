@@ -78,6 +78,19 @@ public class Producto {
 	public void setDescuento(Integer descuento) {
 		this.descuento = descuento;
 	}
+	
+	public BigDecimal getPrecioConDescuento() {
+		
+		if(descuento == null || descuento == 0) {
+			return null;
+		}
+
+		if(descuento == 100) {
+			return BigDecimal.ZERO;
+		}
+		//return precio - (precio * (descuento / 100));
+		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
+	}
 
 	@Override
 	public int hashCode() {

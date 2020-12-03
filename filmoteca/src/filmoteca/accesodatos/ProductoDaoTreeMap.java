@@ -10,9 +10,9 @@ public class ProductoDaoTreeMap implements Dao<Producto> {
 	private static TreeMap<Long, Producto> productos = new TreeMap<>();
 	
 	static {
-		productos.put(1L, new Producto(1L, "El padrino", "drama", "mafia italiana en NY", "padrino.jpg", new BigDecimal("4.95"), 20));
+		productos.put(1L, new Producto(1L, "El padrino", "drama", "mafia italiana en NY", "img/padrino.jpg", new BigDecimal("4.95"), 20));
 		for (Long id = 2L; id <= 12L; id++) {
-			productos.put(id, new Producto(id, "Producto" + id, "Genero" + id, "Descripción" + id, "foto" + id + ".jpg", new BigDecimal(5 * id), id.intValue()));
+			productos.put(id, new Producto(id, "Producto" + id, "Genero" + id, "Descripción" + id, "http://placeimg.com/640/480/nature?" + id, new BigDecimal(5 * id), id.intValue()));
 		}
 	}
 	
