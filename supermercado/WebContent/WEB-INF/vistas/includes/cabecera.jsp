@@ -40,8 +40,19 @@
 					</a></li>
 				</ul>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="login">Login</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="carrito">Ver carrito</a>
+						<c:choose>
+							<c:when test="${sessionScope.usuario == null}">
+								<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="navbar-text">${sessionScope.usuario.email}</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 				</ul>
 			</div>
 		</nav>
