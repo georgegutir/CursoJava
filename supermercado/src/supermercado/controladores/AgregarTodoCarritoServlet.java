@@ -22,12 +22,16 @@ public class AgregarTodoCarritoServlet extends HttpServlet {
 			throws ServletException, IOException {
 //		response.setContentType("text/plain");
 //		PrintWriter out = response.getWriter();
+		
+		System.out.println("doGet AgregarTodoCarritoServlet");
 
 		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
 
 		LinkedHashMap<Long, Producto> carrito = new LinkedHashMap<>();
 
 		Enumeration<String> ids = request.getParameterNames();
+		
+		System.out.println("¿Hay elementos en la colección de nombres? " + ids.hasMoreElements());
 
 		String sId;
 		Long id;
@@ -39,6 +43,8 @@ public class AgregarTodoCarritoServlet extends HttpServlet {
 			sId = ids.nextElement();
 			id = Long.parseLong(sId);
 			cantidad = Integer.parseInt(request.getParameter(sId));
+			
+			System.out.println(id + ": " + cantidad);
 
 			if (cantidad > 0) {
 //				out.println(id + ": " + cantidad);
@@ -47,6 +53,8 @@ public class AgregarTodoCarritoServlet extends HttpServlet {
 				producto.setCantidad(cantidad);
 
 				carrito.put(id, producto);
+				
+				System.out.println(producto);
 
 //				out.println(producto);
 			}
