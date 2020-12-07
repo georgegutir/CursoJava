@@ -16,3 +16,7 @@ del:before {
 
   transform:rotate(-15deg);
 }
+
+.img-Cabecera {
+	width: -webkit-fill-available;
+}

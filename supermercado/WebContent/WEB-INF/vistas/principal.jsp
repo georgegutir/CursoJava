@@ -17,7 +17,7 @@
 					<%-- <c:if test="${producto.descuento != null}">
 					<div class="card-header">${producto.descuento != null ? ''.concat(producto.descuento).concat('% descuento') : ''}</div>
 				</c:if> --%>
-				<div class="card-body">
+					<div class="card-body">
 						<h5 class="card-title">${producto.nombre}</h5>
 						<p class="card-text">${producto.descripcion}</p>
 						<p class="card-text lead row">
@@ -35,9 +35,33 @@
 										type="currency" value="${producto.precioConDescuento}" />
 								</strong>
 							</c:if>
-						<strong class="col-6 text-danger text-right"> <fmt:formatNumber
-										type="currency" value="${producto.precioConDescuento}" />
-								</strong>
+							<small class="text-muted col-12">(<fmt:formatNumber
+									type="currency" value="${producto.precioUnidadMedida}" />&nbsp;/&nbsp;${producto.unidadMedida})
+							</small> <small class="text-muted col-12">${producto.cantidad} en
+								stock</small>
+						</p>
+						<p class="card-text">
+							<div class="input-group mx-auto" style="width: 9rem">
+								<div class="input-group-prepend">
+									<button class="btn btn-secondary btn-menos" type="button">
+										<i class="fas fa-minus"></i>
+									</button>
+								</div>
+								<input type="number"
+									class="form-control text-center font-weight-bold" placeholder=""
+									aria-label="Cantidad" value="0" name="${producto.id}"
+									min="0" />
+								<div class="input-group-append">
+									<button class="btn btn-secondary btn-mas" type="button">
+										<i class="fas fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</p>
+					</div>
+					<div class="card-footer bg-primary p-0">
+						<a href="#" class="btn btn-block text-white">Añadir al carrito</a>
+					</div>
 				</div>
 			</div>
 		</c:forEach>

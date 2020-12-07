@@ -25,8 +25,10 @@
 </head>
 <body>
 
-	<header class="sticky-top">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<header class="card col-12 bg-dark px-0">
+		<img class="img-fluid mx-auto d-block" src="img/cabecera.jpg" alt="logo">
+	</header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 			<a class="navbar-brand" href="#">Filmoteca</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -48,5 +50,5 @@
 				
 			</div>
 		</nav>
-	</header> 
+	 
 	<main class="container-fluid pt-3"> 

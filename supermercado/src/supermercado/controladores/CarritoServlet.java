@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/carrito")
 public class CarritoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/vistas/carrito.jsp").forward(request, response);
 	}
