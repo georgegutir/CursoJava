@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
 <h1>Carrito de la compra</h1>
+
 <button class="btn btn-primary btn-block mb-3">Comprar</button>
 <table class="table">
 	<thead class="table-dark">
@@ -21,13 +22,16 @@
 				<td>${producto.value.nombre}</td>
 				<td><fmt:formatNumber type="currency" value="${producto.value.precio}" /></td>
 				<td>${producto.value.cantidad}</td>
-				<td><fmt:formatNumber type="currency" value="${producto.value.precio*producto.value.cantidad}" /></td>
+				<c:set var="precioproducto" value="${producto.value.precio*producto.value.cantidad}" />
+				<td><fmt:formatNumber type="currency" value="${precioproducto}" /></td>
+				<c:set var="total" value="${(total + precioproducto)}" />
 			</tr>
 		</c:forEach>
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="5" align="right">total</td>
+			<th colspan="4" class="text-right">Total de la compra:</th>
+			<th><fmt:formatNumber type="currency" value="${total}"/></th>
 		</tr>
 	</tfoot>
 </table>

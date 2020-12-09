@@ -7,10 +7,6 @@
 <html lang="es">
 <head>
 
-<!-- base pa tener el mismo menu en todas las pag y no se rompa la ruta ej. cuenta admin -->
-<%-- <base href="/supermercado/" /> --%>
-<base href="${pageContext.request.contextPath}/" /> 
-
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -20,13 +16,15 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- FontAwesome -->
 <link rel="stylesheet" href="css/all.min.css">
+<!-- CSS propio -->
+<link rel="stylesheet" href="css/actividad2.css">
 
 <title>Actividad2</title>
 </head>
 <body>
 	<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Ferretería</a>
+			<a class="navbar-brand" href="principal">FERRETERÍA</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -50,6 +50,7 @@ public class AgregarCarritoServlet extends HttpServlet {
 		request.getSession().setAttribute("carrito", carrito);
 
 		response.sendRedirect(request.getContextPath() + "/carrito");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
