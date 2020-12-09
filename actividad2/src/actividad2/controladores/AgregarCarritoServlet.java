@@ -1,6 +1,7 @@
 package actividad2.controladores;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 
@@ -30,6 +31,7 @@ public class AgregarCarritoServlet extends HttpServlet {
 		String sId;
 		Long id;
 		Integer cantidad;
+		BigDecimal totalCompra;
 
 		Producto producto;
 
@@ -37,14 +39,20 @@ public class AgregarCarritoServlet extends HttpServlet {
 			sId = ids.nextElement();
 			id = Long.parseLong(sId);
 			cantidad = Integer.parseInt(request.getParameter(sId));
+			totalCompra = new BigDecimal(0);
 
 			if (cantidad > 0) {
 
 				producto = dao.obtenerPorId(id);
 				producto.setCantidad(cantidad);
+				
+				producto.getTotalProducto();
 
 				carrito.put(id, producto);
+				//totalCompra = totalCompra.add(producto.getPrecio().multiply(new BigDecimal(cantidad)));
+				totalCompra = totalCompra.add(producto.getTotalProducto());
 			}
+			request.getSession().setAttribute("totalCompra", totalCompra);
 		}
 
 		request.getSession().setAttribute("carrito", carrito);

@@ -22,16 +22,16 @@
 				<td>${producto.value.nombre}</td>
 				<td><fmt:formatNumber type="currency" value="${producto.value.precio}" /></td>
 				<td>${producto.value.cantidad}</td>
-				<c:set var="precioproducto" value="${producto.value.precio*producto.value.cantidad}" />
-				<td><fmt:formatNumber type="currency" value="${precioproducto}" /></td>
-				<c:set var="total" value="${(total + precioproducto)}" />
+				<!-- <c:set var="totalProducto" value="${producto.value.precio*producto.value.cantidad}" /> -->
+				<td><fmt:formatNumber type="currency" value="${producto.value.totalProducto}" /></td>
+				<!-- <c:set var="totalCompra" value="${(totalCompra + totalProducto)}" /> -->
 			</tr>
 		</c:forEach>
 	</tbody>
 	<tfoot>
 		<tr>
 			<th colspan="4" class="text-right">Total de la compra:</th>
-			<th><fmt:formatNumber type="currency" value="${total}"/></th>
+			<th><fmt:formatNumber type="currency" value="${totalCompra}"/></th>
 		</tr>
 	</tfoot>
 </table>

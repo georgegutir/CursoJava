@@ -116,6 +116,10 @@ public class Producto implements Serializable{
 		return "Producto [id=" + id + ", nombre=" + nombre + ", urlImagen=\" + urlImagen\r\n"
 				+ "				+ \", precio=" + precio + ", cantidad=" + cantidad +"]";
 	}
+
+	public BigDecimal getTotalProducto() {
+		return getPrecio().multiply(new BigDecimal(cantidad));
+	}
 	
 
 }
