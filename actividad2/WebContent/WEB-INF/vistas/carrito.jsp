@@ -5,7 +5,7 @@
 <h1>Carrito de la compra</h1>
 
 <button class="btn btn-primary btn-block mb-3">Comprar</button>
-<table class="table">
+<table class="table table-striped">
 	<thead class="table-dark">
 		<tr>
 			<th>Id</th>
@@ -15,7 +15,7 @@
 			<th>Total</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody> 
 		<c:forEach items="${carrito}" var="producto">
 			<tr>
 				<td>${producto.value.id}</td>
