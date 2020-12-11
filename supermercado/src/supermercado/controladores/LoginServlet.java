@@ -19,7 +19,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
@@ -31,6 +30,9 @@ public class LoginServlet extends HttpServlet {
 			//request.getRequestDispatcher("/admin/index").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/admin/index");
 		} else {
+			request.setAttribute("alertaTexto", "El usuario o la contraseña son incorrectos");
+			request.setAttribute("alertaNivel", "danger");
+			
 			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 		}
 	}

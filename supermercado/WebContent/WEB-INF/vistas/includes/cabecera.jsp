@@ -60,8 +60,19 @@
 								<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a></li>
 							</c:otherwise>
 					</c:choose>
+					</li>
 				</ul>
 			</div>
 		</nav>
+		<c:if test="${alertaTexto != null}">
+			<div class="alert alert-${alertaNivel} alert-dismissible fade show"
+				role="alert">
+				${alertaTexto}
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</c:if>
 	</header> 
 	<main class="container pt-3"> 
