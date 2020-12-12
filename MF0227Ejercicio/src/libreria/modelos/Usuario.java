@@ -1,4 +1,4 @@
-package modelos;
+package libreria.modelos;
 
 public class Usuario {
 
