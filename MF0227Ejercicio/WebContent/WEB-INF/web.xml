@@ -5,4 +5,7 @@
    <welcome-file>principal</welcome-file>
   </welcome-file-list>
 
+<error-page>
+  	<location>/error</location>
+  </error-page>
 </web-app>

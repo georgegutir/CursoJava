@@ -43,7 +43,8 @@ public class LibroServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/libro.jsp").forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// Cambiar codificación de entrada de datos de formulario de Windows-1252 a UTF8
 
 		request.setCharacterEncoding("utf-8");

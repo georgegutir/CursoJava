@@ -17,22 +17,13 @@ public class Libro {
 	private String errorPrecio;
 	private String errorDescuento;
 
-
-	public Libro() {
-		super();
-		this.id = (long) 0;
-		this.nombre = "Titulo Desconocido";
-		this.precio = new BigDecimal(0);
-		this.descuento = 0;
-	}
-
-	public Libro(String id, String nombre, String urlImagen, String precio, String descuento, String autor) {
+	public Libro(String id, String nombre, String precio, String descuento, String autor, String urlImagen) {
 		setId(id);
 		setNombre(nombre);
-		setUrlImagen(urlImagen);
 		setPrecio(precio);
 		setDescuento(descuento);
 		setAutor(autor);
+		setUrlImagen(urlImagen);
 	}
 	
 	private void setId(String id) {
