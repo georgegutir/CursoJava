@@ -16,3 +16,7 @@ del:before {
 
   transform:rotate(-15deg);
 }
+
+.fotosPortada {
+	width: 80% !important;
+}

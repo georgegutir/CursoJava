@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
+
+<h1>Edición de libro</h1>
+
+<form action="admin/index" method="post" class="needs-validation" novalidate>
+
+	<div class="form-group row">
+		<label for="id" class="col-md-4 col-lg-3 col-form-label">Id</label>
+		<div class="col">
+			<input type="number" class="form-control" id="id" name="id" value="${libro.id}"
+				readonly placeholder="Id del libro">
+			<div class="valid-feedback">Id correcto</div>
+			<div class="invalid-feedback"></div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="nombre" class="col-md-4 col-lg-3  col-form-label">Nombre</label>
+		<div class="col">
+			<input type="text" class="form-control" id="nombre" name="nombre" value="${libro.nombre}"
+				required minlength="3" maxlength="150">
+			<div class="valid-feedback">Nombre correcto</div>
+			<div class="invalid-feedback">Debe introducir un nombre con
+				como mínimo 3 letras, y menos de 150</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="precio" class="col-md-4 col-lg-3 col-form-label">Precio</label>
+		<div class="input-group col">
+			<input type="number" step=".01" min="0" class="form-control"
+				id="precio" name="precio" value="${libro.precio}" required>
+
+			<div class="input-group-append">
+				<span class="input-group-text rounded-right">€</span>
+			</div>
+
+			<div class="valid-feedback">Precio correcto</div>
+			<div class="invalid-feedback">Debe rellenarse y ser mayor que 0</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="descuento" class="col-md-4 col-lg-3 col-form-label">Descuento</label>
+		<div class="input-group col">
+			<input type="number" class="form-control" id="descuento" name="descuento" value="${libro.descuento}"
+				name="cantidad" min="0" max="100" />
+			<div class="input-group-append">
+				<span class="input-group-text rounded-right">%</span>
+			</div>
+			<div class="valid-feedback">Descuento correcto</div>
+			<div class="invalid-feedback">Debe introducir un valor entre 0 y 100</div>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label for="autor" class="col-md-4 col-lg-3  col-form-label">Autor</label>
+		<div class="col">
+			<input type="text" class="form-control" id="autor" name="autor" value="${libro.autor}"
+				placeholder="Debe introducir el nombre del autor">
+			<div class="valid-feedback">Autor correcto</div>
+			<div class="invalid-feedback"></div>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label for="urlImagen" class="col-md-4 col-lg-3 col-form-label">Imagen</label>
+		<div class="col">
+				<div class="custom-file">
+				 <input type="file" class="custom-file-input" id="imagen" value="${libro.urlImagen}"
+					name="imagen" lang="es"> <label class="custom-file-label"
+					for="imagen" data-browse="Elegir">Seleccionar archivo</label>
+				</div>
+			<div class="valid-feedback">Imagen correcta</div>
+			<div class="invalid-feedback"></div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="offset-md-4 offset-lg-3 col">
+			<button type="submit" class="btn btn-primary">Aceptar</button>
+		</div>
+	</div>
+
+</form>
+
+<%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>

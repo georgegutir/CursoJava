@@ -3,9 +3,6 @@ package libreria.modelos;
 import java.math.BigDecimal;
 
 public class Libro {
-	
-	static final protected String AUTOR_DEFECTO = "Anónimo";
-	static final protected String IMAGEN_DEFECTO = "img/imagen.jpg";
 
 	private Long id;
 	private String nombre;
@@ -17,11 +14,9 @@ public class Libro {
 	private boolean correcto = true;
 
 	private String errorId;
-	private String errorNombre;
 	private String errorPrecio;
 	private String errorDescuento;
-	private String errorAutor;
-	private String errorUrlImagen;
+
 
 	public Libro() {
 		super();
@@ -29,18 +24,48 @@ public class Libro {
 		this.nombre = "Titulo Desconocido";
 		this.precio = new BigDecimal(0);
 		this.descuento = 0;
-		this.autor = AUTOR_DEFECTO;
-		this.urlImagen = IMAGEN_DEFECTO;
+	}
+
+	public Libro(String id, String nombre, String urlImagen, String precio, String descuento, String autor) {
+		setId(id);
+		setNombre(nombre);
+		setUrlImagen(urlImagen);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setAutor(autor);
+	}
+	
+	private void setId(String id) {
+		try {
+			setId(id.trim().length() != 0 ? Long.parseLong(id) : null);
+		} catch (NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}
+	}
+
+	private void setPrecio(String precio) {
+		try {
+			setPrecio(new BigDecimal(precio));
+		} catch (Exception e) {
+			setErrorPrecio("El precio no tiene un formato correcto");
+		}
+	}
+
+	private void setDescuento(String descuento) {
+		try {
+			setDescuento(Integer.parseInt(descuento));
+		} catch (NumberFormatException e) {
+			setErrorDescuento("El descuento debe ser un número entero");
+		}
 	}
 	
 	public Libro(Long id, String nombre, BigDecimal precio, Integer descuento, String autor, String urlImagen) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.descuento = descuento;
-		this.autor = autor;
-		this.urlImagen = urlImagen;
+		setId(id);
+		setNombre(nombre);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setAutor(autor);
+		setUrlImagen(urlImagen);
 	}
 
 	public Long getId() {
@@ -56,9 +81,6 @@ public class Libro {
 	}
 
 	public void setNombre(String nombre) {
-		if (nombre == null || nombre.trim().length() < 3 || nombre.trim().length() > 150) {
-			setErrorNombre("Debe tener al menos 3 letras y menos de 150");
-		}
 		this.nombre = nombre;
 	}
 
@@ -83,7 +105,7 @@ public class Libro {
 	}
 
 	public void setAutor(String autor) {
-		setAutor(autor.trim().length() != 0 ? autor : AUTOR_DEFECTO);
+		this.autor = autor;
 	}
 
 	public String getUrlImagen() {
@@ -91,9 +113,10 @@ public class Libro {
 	}
 
 	public void setUrlImagen(String urlImagen) {
-		setUrlImagen(urlImagen.trim().length() != 0 ? urlImagen : IMAGEN_DEFECTO);
+		this.urlImagen = urlImagen;
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -153,6 +176,41 @@ public class Libro {
 	public String toString() {
 		return "Libro [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", descuento=" + descuento + ", autor="
 				+ autor + ", urlImagen=" + urlImagen + "]";
+	}
+	
+	public boolean isCorrecto() {
+		return correcto;
+	}
+
+	public void setCorrecto(boolean correcto) {
+		this.correcto = correcto;
+	}
+	
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		correcto = false;
+		this.errorId = errorId;
+	}
+	
+	public String getErrorPrecio() {
+		return errorPrecio;
+	}
+
+	public void setErrorPrecio(String errorPrecio) {
+		correcto = false;
+		this.errorPrecio = errorPrecio;
+	}
+
+	public String getErrorDescuento() {
+		return errorDescuento;
+	}
+
+	public void setErrorDescuento(String errorDescuento) {
+		correcto = false;
+		this.errorDescuento = errorDescuento;
 	}
 
 }

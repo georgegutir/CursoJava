@@ -8,7 +8,7 @@
 <head>
 
 <!-- base pa tener el mismo menu en todas las pag y no se rompa la ruta ej. cuenta admin -->
-<%-- <base href="/supermercado/" /> --%>
+<%-- <base href="/libreria/" /> --%>
 <base href="${pageContext.request.contextPath}/" /> 
 
 <!-- Required meta tags -->
@@ -23,14 +23,17 @@
 <!-- Datatables -->
 <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css" />
 <!-- Hoja de estilos personalizada -->
-<link rel="stylesheet" href="css/supermercado.css">
+<link rel="stylesheet" href="css/ejercicio.css">
 
-<title>Supermercado</title>
+<title>Librería</title>
 </head>
 <body>
-	<header class="sticky-top">
+	<div class="card bg-dark text-white">
+		<img src="img/cabecera.jpg" alt="librería" class="card-img img-fluid">
+	</div>
+	<header class="sticky-top">	
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="principal">Supermercado</a>
+			<h1><a class="navbar-brand" href="principal">Librería</a></h1>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -40,27 +43,21 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="principal">Inicio
-							<span class="sr-only">(current)</span>
-					</a></li>
 					<c:if test="${sessionScope.usuario != null}">
-						<li class="nav-item"><a class="nav-link" href="admin/index">Mantenimiento
-								productos</a></li>
+						<li class="nav-item"><a class="nav-link" href="admin/libro">Dar de alta</a></li>
+						<li class="nav-item"><a class="nav-link" href="admin/index">Editar</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="carrito">Ver carrito</a> 
 					<c:choose>
 							<c:when test="${sessionScope.usuario == null}">
 								<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="navbar-text">${sessionScope.usuario.email}</a>
-								</li>
+								<li class="navbar-text">Administrador</li>
 								<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a></li>
 							</c:otherwise>
 					</c:choose>
-					</li>
 				</ul>
 			</div>
 		</nav>
