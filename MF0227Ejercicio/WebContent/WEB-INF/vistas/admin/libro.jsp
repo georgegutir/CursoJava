@@ -12,7 +12,7 @@
 			<input type="number" class="form-control ${libro.errorId != null ? 'is-invalid' : '' }" id="id" name="id" value="${libro.id}"
 				readonly placeholder="Id del libro">
 			<div class="valid-feedback">Id correcto</div>
-			<div class="invalid-feedback">${producto.errorId}</div>
+			<div class="invalid-feedback">${libro.errorId}</div>
 		</div>
 	</div>
 
