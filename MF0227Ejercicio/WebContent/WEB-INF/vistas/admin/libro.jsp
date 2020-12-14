@@ -4,7 +4,7 @@
 
 <h1>Edición de libro</h1>
 
-<form action="admin/index" method="post" class="needs-validation" novalidate>
+<form action="" method="post" class="needs-validation" novalidate>
 
 	<div class="form-group row">
 		<label for="id" class="col-md-4 col-lg-3 col-form-label">Id</label>
@@ -46,7 +46,7 @@
 		<label for="descuento" class="col-md-4 col-lg-3 col-form-label">Descuento</label>
 		<div class="input-group col">
 			<input type="number" class="form-control ${libro.errorDescuento != null ? 'is-invalid' : '' }"
-			id="descuento" name="descuento" value="${libro.descuento}"name="cantidad" min="0" max="100" />
+			id="descuento" name="descuento" value="${libro.descuento}" name="cantidad" min="0" max="100" />
 				<div class="input-group-append">
 					<span class="input-group-text rounded-right">%</span>
 				</div>
