@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 import supermercado.modelos.Usuario;
 
-public class UsuarioDaoTreeMap implements Dao<Usuario> {
+public class UsuarioDaoTreeMap implements DaoUsuario {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();
 
 	static {

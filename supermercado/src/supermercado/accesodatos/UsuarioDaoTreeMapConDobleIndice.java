@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 import supermercado.modelos.Usuario;
 
-public class UsuarioDaoTreeMapConDobleIndice implements Dao<Usuario> {
+public class UsuarioDaoTreeMapConDobleIndice implements DaoUsuario {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();
 	private static TreeMap<String, Usuario> usuariosPorEmail = new TreeMap<>();
 
