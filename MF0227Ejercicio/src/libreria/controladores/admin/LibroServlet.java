@@ -82,12 +82,12 @@ public class LibroServlet extends HttpServlet {
 			// Si no está rellenado el id, es que queremos añadir
 			dao.crear(libro);
 
-			mensaje = "Se ha creado el producto correctamente";
+			mensaje = "Se ha creado el libro correctamente";
 		} else {
 			// Si está rellenado el id, es que queremos modificar
 			dao.modificar(libro);
 
-			mensaje = "Se ha modificado el producto correctamente";
+			mensaje = "Se ha modificado el libro correctamente";
 		}
 
 		// 4. Generar modelo para la vista
