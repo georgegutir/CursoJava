@@ -67,6 +67,14 @@ public class ProductoServlet extends HttpServlet {
 		LOGGER.log(Level.INFO, producto.toString());
 
 		// 3. Tomar decisiones según lo recibido
+		
+		if (!producto.isCorrecto()) {
+			// 4. Generar modelo para la vista
+			request.setAttribute("producto", producto);
+			// 5. Redirigir a otra vista
+			request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
+			return;
+		}
 
 		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
 
