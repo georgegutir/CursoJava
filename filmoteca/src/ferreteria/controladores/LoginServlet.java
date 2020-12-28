@@ -1,4 +1,4 @@
-package filmoteca.controladores;
+package ferreteria.controladores;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import filmoteca.accesodatos.UsuarioDaoTreeMap;
-import filmoteca.modelos.Usuario;
+import ferreteria.accesodatos.UsuarioDaoTreeMap;
+import ferreteria.modelos.Usuario;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

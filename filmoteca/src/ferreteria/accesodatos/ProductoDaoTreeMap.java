@@ -1,18 +1,20 @@
-package filmoteca.accesodatos;
+package ferreteria.accesodatos;
 
 import java.math.BigDecimal;
 import java.util.TreeMap;
 
-import filmoteca.modelos.Producto;
+import org.apache.commons.lang3.SerializationUtils;
+
+import ferreteria.modelos.Producto;
 
 public class ProductoDaoTreeMap implements Dao<Producto> {
 	
 	private static TreeMap<Long, Producto> productos = new TreeMap<>();
 	
 	static {
-		productos.put(1L, new Producto(1L, "El padrino", "drama", "mafia italiana en NY", "img/padrino.jpg", new BigDecimal("4.95"), 20));
+		productos.put(1L, new Producto(1L, "Martillo", "img/martillo.jpg", new BigDecimal("9.95"), 20, 5));
 		for (Long id = 2L; id <= 12L; id++) {
-			productos.put(id, new Producto(id, "Producto" + id, "Genero" + id, "Descripción" + id, "http://placeimg.com/640/480/nature?" + id, new BigDecimal(5 * id), id.intValue()));
+			productos.put(id, new Producto(id, "Producto" + id, "http://placeimg.com/640/480/nature?" + id, new BigDecimal(5 * id),  id.intValue(), id.intValue()));
 		}
 	}
 	
@@ -44,7 +46,7 @@ public class ProductoDaoTreeMap implements Dao<Producto> {
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		return productos.get(id);
+		return SerializationUtils.clone(productos.get(id));
 	}
 
 	@Override

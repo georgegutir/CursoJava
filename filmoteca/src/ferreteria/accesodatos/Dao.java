@@ -1,4 +1,4 @@
-package filmoteca.accesodatos;
+package ferreteria.accesodatos;
 
 public interface Dao<T> {
 	Iterable<T> obtenerTodos();

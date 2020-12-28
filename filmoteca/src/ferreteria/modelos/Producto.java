@@ -1,26 +1,28 @@
-package filmoteca.modelos;
+package ferreteria.modelos;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Producto {
+public class Producto implements Serializable {
+
+	private static final long serialVersionUID = 5452816664057554386L;
+	
 	private Long id;
 	private String nombre;
-	private String genero;
-	private String descripcion;
 	private String urlImagen;
 	private BigDecimal precio;
 	private Integer descuento;
+	private Integer cantidad;
 	
-	public Producto(Long id, String nombre, String genero, String descripcion, String urlImagen, BigDecimal precio,
-			Integer descuento) {
+	public Producto(Long id, String nombre, String urlImagen, BigDecimal precio,
+			Integer descuento, Integer cantidad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.genero = genero;
-		this.descripcion = descripcion;
 		this.urlImagen = urlImagen;
 		this.precio = precio;
 		this.descuento = descuento;
+		this.cantidad = cantidad;
 	}
 
 	public Long getId() {
@@ -37,22 +39,6 @@ public class Producto {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	public String getUrlImagen() {
@@ -82,7 +68,7 @@ public class Producto {
 	public BigDecimal getPrecioConDescuento() {
 		
 		if(descuento == null || descuento == 0) {
-			return null;
+			return precio;
 		}
 
 		if(descuento == 100) {
@@ -92,13 +78,20 @@ public class Producto {
 		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
 	}
 
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
 		result = prime * result + ((descuento == null) ? 0 : descuento.hashCode());
-		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
@@ -115,20 +108,15 @@ public class Producto {
 		if (getClass() != obj.getClass())
 			return false;
 		Producto other = (Producto) obj;
-		if (descripcion == null) {
-			if (other.descripcion != null)
+		if (cantidad == null) {
+			if (other.cantidad != null)
 				return false;
-		} else if (!descripcion.equals(other.descripcion))
+		} else if (!cantidad.equals(other.cantidad))
 			return false;
 		if (descuento == null) {
 			if (other.descuento != null)
 				return false;
 		} else if (!descuento.equals(other.descuento))
-			return false;
-		if (genero == null) {
-			if (other.genero != null)
-				return false;
-		} else if (!genero.equals(other.genero))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -155,10 +143,9 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", genero=" + genero + ", descripcion=" + descripcion
-				+ ", urlImagen=" + urlImagen + ", precio=" + precio + ", descuento=" + descuento + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", urlImagen=" + urlImagen + ", precio=" + precio
+				+ ", descuento=" + descuento + ", cantidad=" + cantidad + "]";
 	}
-	
 	
 	
 }

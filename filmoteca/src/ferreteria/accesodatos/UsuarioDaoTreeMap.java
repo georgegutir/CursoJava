@@ -1,8 +1,8 @@
-package filmoteca.accesodatos;
+package ferreteria.accesodatos;
 
 import java.util.TreeMap;
 
-import filmoteca.modelos.Usuario;
+import ferreteria.modelos.Usuario;
 
 public class UsuarioDaoTreeMap implements Dao<Usuario> {
 	private static TreeMap<Long, Usuario> usuarios = new TreeMap<>();

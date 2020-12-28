@@ -1,4 +1,4 @@
-package filmoteca.modelos;
+package ferreteria.modelos;
 
 public class Usuario {
 	private Long id;

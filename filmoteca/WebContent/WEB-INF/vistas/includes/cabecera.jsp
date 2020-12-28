@@ -21,7 +21,7 @@
 <!-- Hoja de estilos personalizada -->
 <link rel="stylesheet" href="css/filmoteca.css">
 
-<title>Filmoteca</title>
+<title>Ferretería</title>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
 		<img class="img-fluid mx-auto d-block" src="img/cabecera.jpg" alt="logo">
 	</header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-			<a class="navbar-brand" href="#">Filmoteca</a>
+			<a class="navbar-brand" href="#">Ferretería</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -44,8 +44,19 @@
 					</a></li>
 				</ul>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="login">Login</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="carrito">Ver carrito</a>
+					<c:choose>
+						<c:when test="${sessionScope.usuario == null}">
+							<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item"><a class="navbar-text">${sessionScope.usuario.email}</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				
 			</div>
