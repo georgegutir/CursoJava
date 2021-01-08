@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- FontAwesome -->
 <link rel="stylesheet" href="css/all.min.css">
+<!-- Datatables -->
+<link rel="stylesheet" href="css/dataTables.bootstrap4.min.css" />
 <!-- Hoja de estilos personalizada -->
 <link rel="stylesheet" href="css/filmoteca.css">
 
@@ -42,6 +44,10 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Inicio
 							<span class="sr-only">(current)</span>
 					</a></li>
+					<c:if test="${sessionScope.usuario != null}">
+						<li class="nav-item"><a class="nav-link" href="admin/index">Mantenimiento
+								Productos</a></li>
+					</c:if>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="carrito">Ver carrito</a>

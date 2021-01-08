@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
-<h1>Películas compradas</h1>
+<h1>Carrito compra</h1>
 <!-- ${carrito} -->
 <table class="table">
 	<thead>
@@ -17,11 +17,11 @@
 	<tbody>
 		<c:forEach items="${carrito}" var="producto">
 			<tr>
-				<th>${producto.id}</th>
-				<th>${producto.urlImagen}</th>
-				<th>${producto.nombre}</th>
-				<th>${producto.cantidad}</th>
-				<th><fmt:formatNumber type="currency" value="${producto.precioConDescuento}" /></th>
+				<th>${producto.value.id}</th>
+				<th>${producto.value.urlImagen}</th>
+				<th>${producto.value.nombre}</th>
+				<th>${producto.value.cantidad}</th>
+				<th><fmt:formatNumber type="currency" value="${producto.value.precioConDescuento}" /></th>
 				<!-- ${producto} -->
 			</tr>
 		</c:forEach>
