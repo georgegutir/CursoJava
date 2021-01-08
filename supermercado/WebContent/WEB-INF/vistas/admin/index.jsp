@@ -24,7 +24,7 @@
 				<tr>
 					<th scope="row">${producto.id}</th>
 					<td>${producto.nombre}</td>
-					<td><img src="${producto.urlImagen}" alt="" style="height: 3em" /></td>
+					<td><img src="productimgs/${producto.urlImagen}" alt="" style="height: 3em" /></td>
 					<td>${producto.descripcion}</td>
 					<td><fmt:formatNumber type="currency" value="${producto.precio}" /></td>
 					<td>${producto.cantidad}</td>
