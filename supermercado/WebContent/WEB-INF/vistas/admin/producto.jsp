@@ -23,7 +23,7 @@
 			<select class="form-control ${producto.errorDepartamento != null ? 'is-invalid' : '' }" id="departamento" name="departamento">
 				<option value="0">Introduzca el departamento</option>
 				<c:forEach items="${departamentos}" var="departamento">
-					<option value="${departamento.id}">${departamento.nombre}</option>
+					<option value="${departamento.id}" ${departamento.id == producto.departamento.id ? 'selected' : ''}>${departamento.nombre}</option>
 				</c:forEach>
 			</select>
 		</div>
