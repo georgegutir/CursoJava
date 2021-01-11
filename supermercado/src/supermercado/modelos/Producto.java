@@ -17,6 +17,8 @@ public class Producto implements Serializable{
 	private BigDecimal precioUnidadMedida;
 	private Integer cantidad;
 	
+	private Departamento departamento;
+	
 	private boolean correcto = true;
 
 	private String errorId;
@@ -34,6 +36,19 @@ public class Producto implements Serializable{
 
 //		this(id.trim().length() != 0 ? Long.parseLong(id) : null, nombre, descripcion, urlImagen, new BigDecimal(precio), Integer.parseInt(descuento),
 //				unidadMedida, new BigDecimal(precioUnidadMedida), Integer.parseInt(cantidad));
+		setId(id);
+		setNombre(nombre);
+		setDescripcion(descripcion);
+		setUrlImagen(urlImagen);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setUnidadMedida(unidadMedida);
+		setPrecioUnidadMedida(precioUnidadMedida);
+		setCantidad(cantidad);
+	}
+	
+	public Producto(Long id, String nombre, String descripcion, String urlImagen, BigDecimal precio, Integer descuento,
+			String unidadMedida, BigDecimal precioUnidadMedida, Integer cantidad) {
 		setId(id);
 		setNombre(nombre);
 		setDescripcion(descripcion);
@@ -83,19 +98,6 @@ public class Producto implements Serializable{
 		} catch (NumberFormatException e) {
 			setErrorId("El id debe ser numérico");
 		}
-	}
-	
-	public Producto(Long id, String nombre, String descripcion, String urlImagen, BigDecimal precio, Integer descuento,
-			String unidadMedida, BigDecimal precioUnidadMedida, Integer cantidad) {
-		setId(id);
-		setNombre(nombre);
-		setDescripcion(descripcion);
-		setUrlImagen(urlImagen);
-		setPrecio(precio);
-		setDescuento(descuento);
-		setUnidadMedida(unidadMedida);
-		setPrecioUnidadMedida(precioUnidadMedida);
-		setCantidad(cantidad);
 	}
 
 	public Long getId() {
@@ -202,6 +204,14 @@ public class Producto implements Serializable{
 		}
 		//return precio - (precio * (descuento / 100));
 		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
+	}
+	
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 	
 	public boolean isCorrecto() {
