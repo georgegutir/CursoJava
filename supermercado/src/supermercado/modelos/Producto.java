@@ -30,6 +30,7 @@ public class Producto implements Serializable{
 	private String errorUnidadMedida;
 	private String errorPrecioUnidadMedida;
 	private String errorCantidad;
+	private String errorDepartamento;
 	
 	public Producto(String id, String nombre, String descripcion, String urlImagen, String precio, String descuento,
 			String unidadMedida, String precioUnidadMedida, String cantidad) {
@@ -211,6 +212,9 @@ public class Producto implements Serializable{
 	}
 
 	public void setDepartamento(Departamento departamento) {
+		if(departamento == null || departamento.getId() == null || departamento.getId() == 0L) {
+			setErrorDepartamento("El departamento es obligatorio");
+		}
 		this.departamento = departamento;
 	}
 	
@@ -302,6 +306,15 @@ public class Producto implements Serializable{
 		correcto = false;
 		this.errorCantidad = errorCantidad;
 	}
+	
+	public String getErrorDepartamento() {
+		return errorDepartamento;
+	}
+
+	public void setErrorDepartamento(String errorDepartamento) {
+		correcto = false;
+		this.errorDepartamento = errorDepartamento;
+	}
 
 	@Override
 	public int hashCode() {
@@ -380,11 +393,12 @@ public class Producto implements Serializable{
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", urlImagen=" + urlImagen
 				+ ", precio=" + precio + ", descuento=" + descuento + ", unidadMedida=" + unidadMedida
-				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad=" + cantidad + ", correcto=" + correcto
-				+ ", errorId=" + errorId + ", errorNombre=" + errorNombre + ", errorDescripcion=" + errorDescripcion
-				+ ", errorUrlImagen=" + errorUrlImagen + ", errorPrecio=" + errorPrecio + ", errorDescuento="
-				+ errorDescuento + ", errorUnidadMedida=" + errorUnidadMedida + ", errorPrecioUnidadMedida="
-				+ errorPrecioUnidadMedida + ", errorCantidad=" + errorCantidad + "]";
+				+ ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad=" + cantidad + ", departamento="
+				+ departamento + ", correcto=" + correcto + ", errorId=" + errorId + ", errorNombre=" + errorNombre
+				+ ", errorDescripcion=" + errorDescripcion + ", errorUrlImagen=" + errorUrlImagen + ", errorPrecio="
+				+ errorPrecio + ", errorDescuento=" + errorDescuento + ", errorUnidadMedida=" + errorUnidadMedida
+				+ ", errorPrecioUnidadMedida=" + errorPrecioUnidadMedida + ", errorCantidad=" + errorCantidad
+				+ ", errorDepartamento=" + errorDepartamento + "]";
 	}
 }
 
