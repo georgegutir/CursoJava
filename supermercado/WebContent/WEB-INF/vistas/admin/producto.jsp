@@ -20,7 +20,7 @@
 	<div class="form-group row">
 		<label for="departamento" class="col-md-4 col-lg-3 col-form-label">Departamento</label>
 		<div class="col">
-			<select class="form-control" id="departamento" name="departamento">
+			<select class="form-control ${producto.errorDepartamento != null ? 'is-invalid' : '' }" id="departamento" name="departamento">
 				<option value="0">Introduzca el departamento</option>
 				<c:forEach items="${departamentos}" var="departamento">
 					<option value="${departamento.id}">${departamento.nombre}</option>

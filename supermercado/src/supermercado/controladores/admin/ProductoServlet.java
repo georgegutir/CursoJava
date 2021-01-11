@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import supermercado.accesodatos.Dao;
-import supermercado.accesodatos.DepartamentoDaoMySql;
-import supermercado.accesodatos.ProductoDaoTreeMap;
+import supermercado.controladores.Configuracion;
 import supermercado.modelos.Departamento;
 import supermercado.modelos.Producto;
 
@@ -40,7 +39,7 @@ public class ProductoServlet extends HttpServlet {
 		// 3. Tomar decisiones según lo recibido
 
 		if (id != null) {
-			Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+			Dao<Producto> dao = Configuracion.daoProductos;
 
 			Producto producto = dao.obtenerPorId(Long.parseLong(id));
 
@@ -49,7 +48,7 @@ public class ProductoServlet extends HttpServlet {
 			request.setAttribute("producto", producto);
 		}
 		
-		Iterable<Departamento> departamentos = DepartamentoDaoMySql.getInstancia().obtenerTodos();
+		Iterable<Departamento> departamentos = Configuracion.daoDepartamentos.obtenerTodos();
 
 		request.setAttribute("departamentos", departamentos);
 
@@ -70,6 +69,7 @@ public class ProductoServlet extends HttpServlet {
 
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
+		String departamentoId = request.getParameter("departamento");
 		String urlImagen = null; // = request.getParameter("imagen");
 		String descripcion = request.getParameter("descripcion"); 
 		String precio = request.getParameter("precio");
@@ -83,8 +83,10 @@ public class ProductoServlet extends HttpServlet {
 		for (Part part : request.getParts()) {
 		    nombreFichero = part.getSubmittedFileName();
 
-		    if(nombreFichero != null) {
-			    LOGGER.info(nombreFichero);
+		    LOGGER.info("Nombre de fichero: [" + nombreFichero + "]");
+
+		    if(nombreFichero != null && nombreFichero.trim().length() > 0) {
+			    LOGGER.info("Nombre de fichero ACEPTADO: [" + nombreFichero + "]");
 			    part.write(uploadPath + File.separator + nombreFichero);
 
 			    urlImagen = nombreFichero;
@@ -95,6 +97,8 @@ public class ProductoServlet extends HttpServlet {
 
 		Producto producto = new Producto(id, nombre, descripcion, urlImagen, precio, descuento, unidadMedida, precioUnidadMedida, cantidad);
 
+		producto.setDepartamento(new Departamento(Long.parseLong(departamentoId), null, null));
+		
 		LOGGER.log(Level.INFO, producto.toString());
 
 		// 3. Tomar decisiones según lo recibido
@@ -102,12 +106,16 @@ public class ProductoServlet extends HttpServlet {
 		if (!producto.isCorrecto()) {
 			// 4. Generar modelo para la vista
 			request.setAttribute("producto", producto);
+			
+			Iterable<Departamento> departamentos = Configuracion.daoDepartamentos.obtenerTodos();
+
+			request.setAttribute("departamentos", departamentos);
 			// 5. Redirigir a otra vista
 			request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
 			return;
 		}
 
-		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+		Dao<Producto> dao = Configuracion.daoProductos;
 
 		String mensaje;
 
