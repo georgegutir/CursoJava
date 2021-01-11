@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import supermercado.accesodatos.ProductoDaoTreeMap;
+import supermercado.controladores.Configuracion;
 
 @WebServlet("/admin/index")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("productos", ProductoDaoTreeMap.getInstancia().obtenerTodos());
+		request.setAttribute("productos", Configuracion.daoProductos.obtenerTodos());
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/index.jsp").forward(request, response);
 	}
 

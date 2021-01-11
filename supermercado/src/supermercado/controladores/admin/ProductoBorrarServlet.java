@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import supermercado.accesodatos.Dao;
-import supermercado.accesodatos.ProductoDaoTreeMap;
+import supermercado.controladores.Configuracion;
 import supermercado.modelos.Producto;
 
 @WebServlet("/admin/borrar")
@@ -19,7 +19,7 @@ public class ProductoBorrarServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 
-		Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+		Dao<Producto> dao = Configuracion.daoProductos;
 
 		dao.eliminar(Long.parseLong(id));
 
