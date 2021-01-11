@@ -2,6 +2,8 @@ package supermercado.controladores.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +17,7 @@ import javax.servlet.http.Part;
 
 import supermercado.accesodatos.Dao;
 import supermercado.accesodatos.ProductoDaoTreeMap;
+import supermercado.modelos.Departamento;
 import supermercado.modelos.Producto;
 
 @WebServlet("/admin/producto")
@@ -46,6 +49,15 @@ public class ProductoServlet extends HttpServlet {
 
 			request.setAttribute("producto", producto);
 		}
+		
+		Set<Departamento> departamentos = new HashSet<Departamento>();
+
+		departamentos.add(new Departamento(1L, "Lácteos", null));
+		departamentos.add(new Departamento(2L, "Frescos", null));
+		departamentos.add(new Departamento(3L, "Congelados", null));
+		departamentos.add(new Departamento(4L, "Electrónica", null));
+
+		request.setAttribute("departamentos", departamentos);
 
 		// 5. Redirigir a otra vista
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);

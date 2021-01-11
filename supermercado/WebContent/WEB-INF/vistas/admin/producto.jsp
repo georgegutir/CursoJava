@@ -22,9 +22,9 @@
 		<div class="col">
 			<select class="form-control" id="departamento" name="departamento">
 				<option value="0">Introduzca el departamento</option>
-				<option value="1">Lácteos</option>
-				<option value="2">Frescos</option>
-				<option value="3">Congelados</option>
+				<c:forEach items="${departamentos}" var="departamento">
+					<option value="${departamento.id}">${departamento.nombre}</option>
+				</c:forEach>
 			</select>
 		</div>
 	</div>
