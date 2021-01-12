@@ -48,6 +48,7 @@
 				<input type="file" class="custom-file-input" id="imagen" value="${producto.urlImagen}"
 					name="imagen" lang="es"> <label class="custom-file-label"
 					for="imagen" data-browse="Elegir">${producto.urlImagen != null ? producto.urlImagen : 'Seleccionar Archivo' }</label>
+				<button class="btn btn-danger" type="button" onclick="$('.custom-file [for=imagen]').text('');$('[name=imagenAnterior]').val('')">Borrar imagen</button>
 			</div>
 			<div class="valid-feedback">Imagen correcta</div>
 			<div class="invalid-feedback"></div>
