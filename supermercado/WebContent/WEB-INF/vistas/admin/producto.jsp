@@ -18,18 +18,6 @@
 	</div>
 	
 	<div class="form-group row">
-		<label for="departamento" class="col-md-4 col-lg-3 col-form-label">Departamento</label>
-		<div class="col">
-			<select class="form-control ${producto.errorDepartamento != null ? 'is-invalid' : '' }" id="departamento" name="departamento">
-				<option value="0">Introduzca el departamento</option>
-				<c:forEach items="${departamentos}" var="departamento">
-					<option value="${departamento.id}" ${departamento.id == producto.departamento.id ? 'selected' : ''}>${departamento.nombre}</option>
-				</c:forEach>
-			</select>
-		</div>
-	</div>
-
-	<div class="form-group row">
 		<label for="nombre" class="col-md-4 col-lg-3  col-form-label">Nombre</label>
 		<div class="col">
 			<input type="text" class="form-control ${producto.errorNombre != null ? 'is-invalid' : '' }" id="nombre" name="nombre" value="${producto.nombre}"
@@ -38,6 +26,40 @@
 			<div class="valid-feedback">Nombre correcto</div>
 			<div class="invalid-feedback">${producto.errorNombre != null ? producto.errorNombre : 'Debe introducir un nombre con
 				como mínimo 3 letras, y solo letras y mayúscula la primera'}</div>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<label for="departamento" class="col-md-4 col-lg-3 col-form-label">Departamento</label>
+		<div class="col">
+			<select class="form-control ${producto.errorDepartamento != null ? 'is-invalid' : '' }" id="departamento" name="departamento"
+			onchange="if(this.value == -1) { $('.departamento').show() } else { $('.departamento').hide() }">
+				<option value="0">Introduzca el departamento</option>
+					<c:forEach items="${departamentos}" var="departamento">
+						<option value="${departamento.id}" ${departamento.id == producto.departamento.id ? 'selected' : ''}>${departamento.nombre}</option>
+					</c:forEach>
+				<option value="-1">AÑADIR DEPARTAMENTO</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="form-group row departamento" style="display: none">
+		<label for="departamento-nombre" class="col-md-4 col-lg-3  col-form-label">Nombre de Departamento</label>
+		<div class="col">
+			<input type="text" class="form-control" id="departamento-nombre" name="departamento-nombre"
+				minlength="3" pattern="\p{Lu}\p{Ll}{2}[\p{Ll}]*"
+				placeholder="Debe introducir un nombre con solo letras y mayúscula la primera. Mínimo tres caracteres.">
+			<div class="valid-feedback">Nombre correcto</div>
+			<div class="invalid-feedback">Debe introducir un nombre con
+				como mínimo 3 letras, y solo letras y mayúscula la primera</div>
+		</div>
+	</div>
+
+	<div class="form-group row departamento" style="display: none">
+		<label for="departamento-descripcion" class="col-md-4 col-lg-3  col-form-label">Descripción de Departamento</label>
+		<div class="col">
+			<textarea class="form-control" id="departamento-descripcion" name="departamento-descripcion"></textarea>
+			<div class="valid-feedback">Descripción correcta</div>
 		</div>
 	</div>
 

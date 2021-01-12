@@ -102,7 +102,18 @@ public class ProductoServlet extends HttpServlet {
 
 		Producto producto = new Producto(id, nombre, descripcion, urlImagen, precio, descuento, unidadMedida, precioUnidadMedida, cantidad);
 
-		producto.setDepartamento(new Departamento(Long.parseLong(departamentoId), null, null));
+		Long departamentoIdLong = Long.parseLong(departamentoId);
+
+		if(departamentoIdLong == -1) {
+			String nombreDepartamento = request.getParameter("departamento-nombre");
+			String descripcionDepartamento = request.getParameter("departamento-descripcion");
+
+			Departamento departamento = Configuracion.daoDepartamentos.crearYObtener(new Departamento(null, nombreDepartamento, descripcionDepartamento));
+
+			departamentoIdLong = departamento.getId();
+		}
+
+		producto.setDepartamento(new Departamento(departamentoIdLong, null, null));
 		
 		LOGGER.log(Level.INFO, producto.toString());
 
