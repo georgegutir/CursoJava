@@ -136,6 +136,9 @@ public class Producto implements Serializable{
 	}
 
 	public void setUrlImagen(String urlImagen) {
+		if(urlImagen == null) {
+			urlImagen = "";
+		}
 		this.urlImagen = urlImagen;
 	}
 

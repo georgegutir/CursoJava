@@ -71,6 +71,7 @@ public class ProductoServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String departamentoId = request.getParameter("departamento");
 		String urlImagen = null; // = request.getParameter("imagen");
+		String urlImagenAnterior = request.getParameter("imagenAnterior");
 		String descripcion = request.getParameter("descripcion"); 
 		String precio = request.getParameter("precio");
 		String cantidad = request.getParameter("cantidad");
@@ -91,6 +92,10 @@ public class ProductoServlet extends HttpServlet {
 
 			    urlImagen = nombreFichero;
 		    }
+		}
+		
+		if(urlImagen == null) {
+			urlImagen = urlImagenAnterior;
 		}
 		
 		// 2. Poner información dentro de un modelo
