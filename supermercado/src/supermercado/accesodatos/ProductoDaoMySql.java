@@ -1,21 +1,21 @@
 package supermercado.accesodatos;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import supermercado.modelos.Departamento;
 import supermercado.modelos.Producto;
 
 public class ProductoDaoMySql implements Dao<Producto> {
-
-	private static final String URL = "jdbc:mysql://localhost:3306/supermercado?serverTimezone=UTC";
-	private static final String USER = "root";
-	private static final String PASS = "";
 
 	private static final String SQL_SELECT = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id;";
 	private static final String SQL_SELECT_ID = "SELECT * FROM productos p JOIN departamentos d ON p.departamentos_id = d.id WHERE p.id = ?";
@@ -26,17 +26,19 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	private static final String SQL_UPDATE = "UPDATE productos SET nombre = ?, descripcion = ?, url_imagen = ?, precio = ?, descuento = ?, unidad_medida = ?, precio_unidad_medida = ?, cantidad = ?, departamentos_id = ? WHERE id = ?";
 	private static final String SQL_DELETE = "DELETE FROM productos WHERE id = ?";
 
-	static {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new AccesoDatosException("No se ha encontrado el driver de JDBC para MySQL", e);
-		}
-	}
-
+	private DataSource dataSource;
+	
 	// SINGLETON
 
-	private ProductoDaoMySql() {}
+	private ProductoDaoMySql() {
+		try {
+			InitialContext initCtx=new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			dataSource = (DataSource)envCtx.lookup("jdbc/supermercado");
+		} catch (NamingException e) {
+			throw new AccesoDatosException("No se ha encontrado el JNDI de supermercado", e);
+		}
+	}
 
 	private final static ProductoDaoMySql INSTANCIA = new ProductoDaoMySql();
 
@@ -45,9 +47,18 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	}
 
 	// FIN SINGLETON
+	
+	private Connection obtenerConexion() {
+		try {
+			return dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new AccesoDatosException("Ha habido un error al obtener la conexión", e);
+		}
+	}
+	
 	@Override
 	public Iterable<Producto> obtenerTodos() {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = obtenerConexion();
 				Statement s = con.createStatement();
 				ResultSet rs = s.executeQuery(SQL_SELECT)) {
 
@@ -73,7 +84,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = obtenerConexion();
 				PreparedStatement ps = con.prepareStatement(SQL_SELECT_ID);) {
 
 			ps.setLong(1, id);
@@ -101,7 +112,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 
 	@Override
 	public void crear(Producto producto) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = obtenerConexion();
 				PreparedStatement ps = con.prepareStatement(SQL_INSERT);) {
 
 			ps.setString(1, producto.getNombre());
@@ -126,7 +137,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 
 	@Override
 	public void modificar(Producto producto) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = obtenerConexion();
 				PreparedStatement ps = con.prepareStatement(SQL_UPDATE);) {
 
 			ps.setString(1, producto.getNombre());
@@ -152,7 +163,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 
 	@Override
 	public void eliminar(Long id) {
-		try (Connection con = DriverManager.getConnection(URL, USER, PASS);
+		try (Connection con = obtenerConexion();
 				PreparedStatement ps = con.prepareStatement(SQL_DELETE);) {
 
 			ps.setLong(1, id);
