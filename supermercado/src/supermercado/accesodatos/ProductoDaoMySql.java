@@ -23,6 +23,7 @@ public class ProductoDaoMySql implements Dao<Producto> {
 	private static final String SQL_INSERT = "{call productos_insertar(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 	private static final String SQL_UPDATE = "{call productos_modificar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 	private static final String SQL_DELETE = "{call productos_borrar(?)}";
+	private static final String SQL_UNDELETE = "{call productos_recuperar(?)}";
 
 	private DataSource dataSource;
 	
@@ -182,6 +183,23 @@ public class ProductoDaoMySql implements Dao<Producto> {
 			}
 		} catch (SQLException e) {
 			throw new AccesoDatosException("No se ha podido borrar el producto " + id, e);
+		}
+	}
+	
+	@Override
+	public void recuperar(Long id) {
+		try (Connection con = obtenerConexion();
+				CallableStatement cs = con.prepareCall(SQL_UNDELETE);) {
+
+			cs.setLong(1, id);
+
+			int numeroRegistrosBorrados = cs.executeUpdate();
+
+			if (numeroRegistrosBorrados != 1) {
+				throw new AccesoDatosException("Se han recuperado " + numeroRegistrosBorrados + " registros");
+			}
+		} catch (SQLException e) {
+			throw new AccesoDatosException("No se ha podido recuperado el producto " + id, e);
 		}
 	}
 }

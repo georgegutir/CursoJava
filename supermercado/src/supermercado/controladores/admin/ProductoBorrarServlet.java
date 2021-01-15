@@ -17,11 +17,17 @@ public class ProductoBorrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String sId = request.getParameter("id");
+		String deshacer = request.getParameter("deshacer");
+		Long id = Long.parseLong(sId);
 
 		Dao<Producto> dao = Configuracion.daoProductos;
 
-		dao.eliminar(Long.parseLong(id));
+		if (deshacer != null) {
+			dao.recuperar(id);
+		} else {
+			dao.eliminar(id);
+		}
 
 		request.setAttribute("alertaTexto", "Borrado efectuado correctamente");
 		request.setAttribute("alertaNivel", "success");

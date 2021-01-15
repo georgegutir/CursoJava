@@ -35,8 +35,17 @@
 					<td><fmt:formatNumber type="percent" value="${producto.descuento / 100}" /></td>
 					<td>
 						<div class="btn-group" role="group" aria-label="Opciones">
-							<a class="btn btn-primary btn-sm" href="admin/producto?id=${producto.id}">Editar</a>
-							<a onclick="return confirm('¿Estás seguro?')" class="btn btn-danger btn-sm" href="admin/borrar?id=${producto.id}">Borrar</a>
+							<c:if test="${borrados == null}">
+								<a class="btn btn-primary btn-sm"
+									href="admin/producto?id=${producto.id}">Editar</a> <a
+									onclick="return confirm('¿Estás seguro?')"
+									class="btn btn-danger btn-sm"
+									href="admin/borrar?id=${producto.id}">Borrar</a>
+							</c:if>
+							<c:if test="${borrados != null}">
+								<a class="btn btn-primary btn-sm"
+									href="admin/borrar?id=${producto.id}&deshacer">Recuperar</a>
+							</c:if>
 						</div>
 					</td>
 				</tr>

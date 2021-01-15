@@ -25,4 +25,7 @@ public interface Dao<T> {
 	default void eliminar(Long id){
 		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
 	}
+	default void recuperar(Long id){
+		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
+	}
 }
