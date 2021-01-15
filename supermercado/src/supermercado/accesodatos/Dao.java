@@ -5,6 +5,10 @@ public interface Dao<T> {
 		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
 	}
 	
+	default Iterable<T> obtenerBorrados() {
+		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
+	}
+	
 	default T obtenerPorId(Long id){
 		throw new AccesoDatosException("MÉTODO NO IMPLEMENTADO");
 	}

@@ -44,8 +44,13 @@
 		</tbody>
 	</table>
 
-	<p>
-		<a class="btn btn-primary" href="admin/producto">Añadir producto</a> 
-	</p>
+	<a class="btn btn-primary" href="admin/producto">Añadir producto</a>
+	<form action="admin/index">
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" ${borrados != null ? 'checked' : ''}
+				id="borrados" name="borrados" onchange="submit()"> <label
+				class="form-check-label" for="borrados"> Mostrar sólo borrados </label>
+		</div>
+	</form>
 </div>
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
