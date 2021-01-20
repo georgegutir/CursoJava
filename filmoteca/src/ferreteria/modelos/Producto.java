@@ -94,7 +94,7 @@ public class Producto implements Serializable {
 	}
 
 	public void setNombre(String nombre) {
-		if (nombre == null || nombre.trim().length() < 3 || nombre.matches("[A-Z][a-z]*")) {
+		if (nombre == null || nombre.trim().length() < 3 || !nombre.matches("\\p{Lu}\\p{Ll}{2}[\\p{Ll} ]*")) {
 			setErrorNombre("Debe introducir un nombre con solo letras y mayúscula la primera. Mínimo 3 caracteres");
 		}
 		this.nombre = nombre;

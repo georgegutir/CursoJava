@@ -21,7 +21,7 @@
 		<label for="nombre" class="col-md-4 col-lg-3  col-form-label">Nombre</label>
 		<div class="col">
 			<input type="text" class="form-control ${producto.errorNombre != null ? 'is-invalid' : '' }"" id="nombre" name="nombre" value="${producto.nombre}"
-				required minlength="3" pattern="[A-Z][a-z]*"
+				required minlength="3" pattern="\p{Lu}\p{Ll}{2}[\p{Ll} ]*"
 				placeholder="Debe introducir un nombre con solo letras y mayúscula la primera. Mínimo tres caracteres">
 			<div class="valid-feedback">Nombre correcto</div>
 			<div class="invalid-feedback">${producto.errorNombre != null ? producto.errorNombre : 'Debe introducir un nombre con
