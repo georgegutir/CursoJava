@@ -14,21 +14,68 @@ public class Producto implements Serializable {
 	private Integer descuento;
 	private Integer cantidad;
 	
+	private boolean correcto = true;
+
+	private String errorId;
+	private String errorNombre;
+	private String errorUrlImagen;
+	private String errorPrecio;
+	private String errorDescuento;
+	private String errorCantidad;
+	
 	public Producto(Long id, String nombre, String urlImagen, BigDecimal precio,
 			Integer descuento, Integer cantidad) {
-		this.id = id;
-		this.nombre = nombre;
-		this.urlImagen = urlImagen;
-		this.precio = precio;
-		this.descuento = descuento;
-		this.cantidad = cantidad;
+		setId(id);
+		setNombre(nombre);
+		setUrlImagen(urlImagen);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setCantidad(cantidad);
 	}
 
 	public Producto(String id, String nombre, String urlImagen, String precio, 
 			String descuento, String cantidad) {
 
-		this(id.trim().length() != 0 ? Long.parseLong(id) : null, nombre, urlImagen, 
-				new BigDecimal(precio), Integer.parseInt(descuento), Integer.parseInt(cantidad));
+		//this(id.trim().length() != 0 ? Long.parseLong(id) : null, nombre, urlImagen, 
+		//		new BigDecimal(precio), Integer.parseInt(descuento), Integer.parseInt(cantidad));
+		setId(id);
+		setNombre(nombre);
+		setUrlImagen(urlImagen);
+		setPrecio(precio);
+		setDescuento(descuento);
+		setCantidad(cantidad);
+	}
+	
+	private void setCantidad(String cantidad) {
+		try {
+			setCantidad(Integer.parseInt(cantidad));
+		} catch (Exception e) {
+			setErrorCantidad("La cantidad debe ser un número");
+		}
+	}
+
+	private void setDescuento(String descuento) {
+		try {
+			setDescuento(Integer.parseInt(descuento));
+		} catch (NumberFormatException e) {
+			setErrorDescuento("El descuento debe ser un número entero");
+		}
+	}
+
+	private void setPrecio(String precio) {
+		try {
+			setPrecio(new BigDecimal(precio));
+		} catch (Exception e) {
+			setErrorPrecio("El precio no tiene un formato correcto");
+		}
+	}
+
+	private void setId(String id) {
+		try {
+			setId(id.trim().length() != 0 ? Long.parseLong(id) : null);
+		} catch (NumberFormatException e) {
+			setErrorId("El id debe ser numérico");
+		}
 	}
 
 	public Long getId() {
@@ -36,6 +83,9 @@ public class Producto implements Serializable {
 	}
 
 	public void setId(Long id) {
+		if (id != null && id <= 0) {
+			setErrorId("No se admiten ids inferiores o iguales a 0");
+		}
 		this.id = id;
 	}
 
@@ -44,6 +94,9 @@ public class Producto implements Serializable {
 	}
 
 	public void setNombre(String nombre) {
+		if (nombre == null || nombre.trim().length() < 3 || nombre.matches("[A-Z][a-z]*")) {
+			setErrorNombre("Debe introducir un nombre con solo letras y mayúscula la primera. Mínimo 3 caracteres");
+		}
 		this.nombre = nombre;
 	}
 
@@ -60,6 +113,12 @@ public class Producto implements Serializable {
 	}
 
 	public void setPrecio(BigDecimal precio) {
+		// precio < 10 -----> precio.compareTo(new BigDecimal("10")) < 0
+		// precio >= 100 ---> precio.compareTo(new BigDecimal("100")) >= 0
+		// precio == 5 -----> precio.compareTo(new BigDecimal("5")) == 0
+		if (precio == null || precio.compareTo(BigDecimal.ZERO) < 0) {
+			setErrorPrecio("Debe rellenarse y ser mayor que 0");
+		}
 		this.precio = precio;
 	}
 
@@ -68,6 +127,9 @@ public class Producto implements Serializable {
 	}
 
 	public void setDescuento(Integer descuento) {
+		if (descuento != null && (descuento < 0 || descuento > 100)) {
+			setErrorDescuento("El descuento debe estar comprendido entre 0 y 100");
+		}
 		this.descuento = descuento;
 	}
 	
@@ -89,7 +151,72 @@ public class Producto implements Serializable {
 	}
 
 	public void setCantidad(Integer cantidad) {
+		if(cantidad == null || cantidad < 0) {
+			setCantidad("La cantidad debe ser mayor o igual a cero. Es obligatoria");
+		}
 		this.cantidad = cantidad;
+	}
+	
+	public boolean isCorrecto() {
+		return correcto;
+	}
+
+	public void setCorrecto(boolean correcto) {
+		this.correcto = correcto;
+	}
+
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		correcto = false;
+		this.errorId = errorId;
+	}
+
+	public String getErrorNombre() {
+		return errorNombre;
+	}
+
+	public void setErrorNombre(String errorNombre) {
+		correcto = false;
+		this.errorNombre = errorNombre;
+	}
+
+	public String getErrorUrlImagen() {
+		return errorUrlImagen;
+	}
+
+	public void setErrorUrlImagen(String errorUrlImagen) {
+		correcto = false;
+		this.errorUrlImagen = errorUrlImagen;
+	}
+
+	public String getErrorPrecio() {
+		return errorPrecio;
+	}
+
+	public void setErrorPrecio(String errorPrecio) {
+		correcto = false;
+		this.errorPrecio = errorPrecio;
+	}
+
+	public String getErrorDescuento() {
+		return errorDescuento;
+	}
+
+	public void setErrorDescuento(String errorDescuento) {
+		correcto = false;
+		this.errorDescuento = errorDescuento;
+	}
+
+	public String getErrorCantidad() {
+		return errorCantidad;
+	}
+
+	public void setErrorCantidad(String errorCantidad) {
+		correcto = false;
+		this.errorCantidad = errorCantidad;
 	}
 
 	@Override
@@ -150,8 +277,9 @@ public class Producto implements Serializable {
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", urlImagen=" + urlImagen + ", precio=" + precio
-				+ ", descuento=" + descuento + ", cantidad=" + cantidad + "]";
+				+ ", descuento=" + descuento + ", cantidad=" + cantidad + ", correcto=" + correcto + ", errorId="
+				+ errorId + ", errorNombre=" + errorNombre + ", errorUrlImagen=" + errorUrlImagen + ", errorPrecio="
+				+ errorPrecio + ", errorDescuento=" + errorDescuento + ", errorCantidad=" + errorCantidad + "]";
 	}
-	
-	
+
 }
