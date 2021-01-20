@@ -30,6 +30,9 @@ public class LoginServlet extends HttpServlet {
 			//request.getRequestDispatcher("/principal").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/admin/index");
 		} else {
+			request.setAttribute("alertaTexto", "El usuario o la contraseña son incorrectos");
+			request.setAttribute("alertaNivel", "danger");
+			
 			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 		}
 	}
