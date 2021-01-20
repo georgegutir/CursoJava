@@ -16,13 +16,19 @@ public class Producto implements Serializable {
 	
 	public Producto(Long id, String nombre, String urlImagen, BigDecimal precio,
 			Integer descuento, Integer cantidad) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.urlImagen = urlImagen;
 		this.precio = precio;
 		this.descuento = descuento;
 		this.cantidad = cantidad;
+	}
+
+	public Producto(String id, String nombre, String urlImagen, String precio, 
+			String descuento, String cantidad) {
+
+		this(id.trim().length() != 0 ? Long.parseLong(id) : null, nombre, urlImagen, 
+				new BigDecimal(precio), Integer.parseInt(descuento), Integer.parseInt(cantidad));
 	}
 
 	public Long getId() {
