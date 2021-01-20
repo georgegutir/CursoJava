@@ -28,7 +28,7 @@
 					<td>
 						<div class="btn-group" role="group" aria-label="Opciones">
 							<a class="btn btn-primary btn-sm" href="admin/producto?id=${producto.id}">Editar</a>
-							<a class="btn btn-danger btn-sm" href="#">Borrar</a>
+							<a onclick="return confirm('¿Estás seguro?')" class="btn btn-danger btn-sm" href="admin/borrar?id=${producto.id}">Borrar</a>
 						</div>
 					</td>
 				</tr>
