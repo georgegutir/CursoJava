@@ -21,6 +21,22 @@ public class ProductoServlet extends HttpServlet {
 	private static final Logger LOGGER = Logger.getLogger(ProductoServlet.class.getName());
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		// 1. Recoger información de la petición
+		String id = request.getParameter("id");
+
+		// 2. Poner información dentro de un modelo
+		// 3. Tomar decisiones según lo recibido
+
+		if (id != null) {
+			Dao<Producto> dao = ProductoDaoTreeMap.getInstancia();
+			Producto producto = dao.obtenerPorId(Long.parseLong(id));
+
+		// 4. Generar modelo para la vista
+			request.setAttribute("producto", producto);
+		}
+
+		// 5. Redirigir a otra vista
 		request.getRequestDispatcher("/WEB-INF/vistas/admin/producto.jsp").forward(request, response);
 	}
 	

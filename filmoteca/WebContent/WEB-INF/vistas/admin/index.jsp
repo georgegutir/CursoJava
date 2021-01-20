@@ -27,7 +27,7 @@
 					<td>${producto.cantidad}</td>
 					<td>
 						<div class="btn-group" role="group" aria-label="Opciones">
-							<a class="btn btn-primary btn-sm" href="#">Editar</a>
+							<a class="btn btn-primary btn-sm" href="admin/producto?id=${producto.id}">Editar</a>
 							<a class="btn btn-danger btn-sm" href="#">Borrar</a>
 						</div>
 					</td>
