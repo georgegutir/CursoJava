@@ -37,7 +37,7 @@
 	</table>
 
 	<p>
-		<a class="btn btn-primary" href="#">Añadir producto</a> 
+		<a class="btn btn-primary" href="admin/producto">Añadir producto</a> 
 	</p>
 </div>
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
