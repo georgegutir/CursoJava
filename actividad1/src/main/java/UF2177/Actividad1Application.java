@@ -4,13 +4,16 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.dao.DataAccessException;
+
 import UF2177.entidades.Medicamentos;
 import UF2177.repositorios.Dao;
 
 @SpringBootApplication
-public class Actividad1Application {
+public class Actividad1Application implements CommandLineRunner{
 	
 	// opciones del menú
 	static final protected String OP_ALTAS = "1";
@@ -24,12 +27,12 @@ public class Actividad1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Actividad1Application.class, args);
-		System.out.println("hola");
 	}
 	
 	@Autowired
 	private Dao<Medicamentos> dao;
 	
+	@Override
 	public void run(String... args) throws Exception {
 		boolean salida = true;
 		sc = new Scanner(System.in);
@@ -67,8 +70,13 @@ public class Actividad1Application {
 	private void consultar() {
 		System.out.println("*********LISTADO  DE  MEDICAMENTOS*********");
 
-		for(Medicamentos medicamento: dao.obtenerTodos()) {
-			System.out.println(medicamento);
+		try {
+			for(Medicamentos medicamento: dao.obtenerTodos()) {
+				System.out.println(medicamento);
+			}
+		} catch (DataAccessException e) {
+			System.out.println("Error de acceso a datos");
+			//e.printStackTrace();
 		}	
 	}
 
@@ -90,6 +98,10 @@ public class Actividad1Application {
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Debe introducir un numero");
+			
+			} catch (DataAccessException e) {
+				System.out.println("Error de acceso a datos");
+				//e.printStackTrace();
 	
 			} catch (Exception e) {
 				System.out.println("Ha ocurrido un ERROR");
@@ -132,7 +144,7 @@ public class Actividad1Application {
 			System.out.println("Medicamento guardado");
 			System.out.println("------------------------------------");
 		} catch (Exception e) {
-			System.out.println("Error al crear el nuevo libro");
+			System.out.println("Error al crear el nuevo medicamento");
 		}
 		
 	}
