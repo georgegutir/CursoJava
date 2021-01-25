@@ -26,9 +26,9 @@ public class SpringjdbcApplication implements CommandLineRunner{
 		try {
 			dao.agregar(new Cliente(null, "Nuevo", "Nuevez Novisimez", "13243545Z", LocalDate.now()));
 
-			dao.modificar(new Cliente(2L, "Juan", "Juanes", "87654321A", LocalDate.now()));
+			dao.modificar(new Cliente(3L, "Juan", "Juanes", "87654321A", LocalDate.now()));
 
-			dao.borrar(7L);
+			dao.borrar(4L);
 
 			for(Cliente cliente: dao.obtenerTodos()) {
 				System.out.println(cliente);
