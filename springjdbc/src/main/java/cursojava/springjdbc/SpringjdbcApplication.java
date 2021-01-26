@@ -24,11 +24,11 @@ public class SpringjdbcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		try {
-			dao.agregar(new Cliente(null, "Nuevo", "Nuevez Novisimez", "13243545Z", LocalDate.now()));
+			System.out.println(dao.agregar(new Cliente(null, "Nuevoll", "Nuevez Novisimez", "13243545Z", LocalDate.now())));
 
-			dao.modificar(new Cliente(3L, "Juan", "Juanes", "87654321A", LocalDate.now()));
+			dao.modificar(new Cliente(5L, "Juan", "Juanes", "87654321A", LocalDate.now()));
 
-			dao.borrar(4L);
+			dao.borrar(6L);
 
 			for(Cliente cliente: dao.obtenerTodos()) {
 				System.out.println(cliente);
@@ -37,7 +37,7 @@ public class SpringjdbcApplication implements CommandLineRunner{
 			System.out.println(dao.obtenerPorId(1L));
 		} catch (DataAccessException e) {
 			System.out.println("Error de acceso a datos");
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 	}
