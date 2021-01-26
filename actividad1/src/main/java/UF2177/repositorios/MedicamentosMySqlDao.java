@@ -1,8 +1,13 @@
 package UF2177.repositorios;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import UF2177.entidades.Medicamentos;
@@ -25,11 +30,18 @@ public class MedicamentosMySqlDao implements Dao<Medicamentos>{
 
 	@Override
 	public Medicamentos agregar(Medicamentos medicamento) {
-		jdbcTemplate.update("INSERT INTO medicamentos (nombre, precio) VALUES (?, ?)",
-				new Object[] { medicamento.getNombre(), medicamento.getPrecio() });
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
 
-		// TODO: devolver el objeto insertado incluyendo el ID nuevo autogenerado por la
-		// base de datos
+		jdbcTemplate.update(connection -> {
+			PreparedStatement ps = connection.prepareStatement(
+					"INSERT INTO medicamentos (nombre, precio) VALUES (?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, medicamento.getNombre());
+			ps.setBigDecimal(2, medicamento.getPrecio());
+			return ps;
+		}, keyHolder);
+
 		return medicamento;
 	}
 
