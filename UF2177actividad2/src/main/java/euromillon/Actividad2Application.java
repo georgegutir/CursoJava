@@ -15,8 +15,7 @@ public class Actividad2Application {
 	
 		// opciones del menú
 		static final protected String OP_ALTAS = "1";
-		static final protected String OP_BAJAS = "2";
-		static final protected String OP_CONSULTAS = "3";
+		static final protected String OP_CONSULTAS = "2";
 		static final protected String OP_SALIR = "s";
 
 		// Variables globales
@@ -51,9 +50,6 @@ public class Actividad2Application {
 					case OP_ALTAS:
 						crear();
 						break;
-					case OP_BAJAS:
-						eliminar();
-						break;
 					case OP_CONSULTAS:
 						consultar();
 						break;
@@ -81,31 +77,7 @@ public class Actividad2Application {
 			}	
 		}
 
-		private void eliminar() {
-			boolean isError = true;
-
-			consultar();
-
-			do {
-				try {
-					System.out.println("Introduce el id del sorteo que quieres eliminar:");
-					Long id = Long.parseLong(sc.nextLine());
-					if (dao.obtenerPorId(id) == null) {
-						System.out.println("No se encuentra el sorteo en la base de datos");
-					} else {
-						dao.borrar(id);
-						System.out.println("Sorteo eliminado");
-						isError = false;
-					}
-				} catch (NumberFormatException e) {
-					System.out.println("Debe introducir un numero");
-
-				} catch (Exception e) {
-					System.out.println("Ha ocurrido un ERROR");
-				}
-			}while (isError);
-		}
-
+		
 		private void crear() {
 			int[] numeros = new int[NUM];
 			int[] stars = new int[STARS];
@@ -134,7 +106,6 @@ public class Actividad2Application {
 			System.out.println("****************EL EUROMILLÓN******************");
 			System.out.println("***********************************************");
 			System.out.println(" " + OP_ALTAS + ".- Dar de alta nuevo " + nombre);
-			System.out.println(" " + OP_BAJAS + ".- Eliminar un " + nombre);
 			System.out.println(" " + OP_CONSULTAS + ".- Consultar listado de " + nombre);
 			System.out.println(" " + OP_SALIR + " - Salir");
 			System.out.println("***********************************************");

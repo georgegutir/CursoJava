@@ -1,9 +1,24 @@
 package euromillon.accesodatos;
 
 public interface Dao<T> {
-	Iterable<T> obtenerTodos();
-	T obtenerPorId(Long id);
+	default Iterable<T> obtenerTodos() {
+		throw new AccesoDatosException("ESTE MÉTODO NO ESTÁ IMPLEMENTADO");
+	}
 
-	T agregar(T objeto);
-	void borrar(Long id);
+	default T obtenerPorId(Long id) {
+		throw new AccesoDatosException("ESTE MÉTODO NO ESTÁ IMPLEMENTADO");
+	}
+
+	default T agregar(T t) {
+		throw new AccesoDatosException("ESTE MÉTODO NO ESTÁ IMPLEMENTADO");
+	}
+	
+	default T modificar(T t) {
+		throw new AccesoDatosException("ESTE MÉTODO NO ESTÁ IMPLEMENTADO");
+	}
+
+	default T borrar(Long id) {
+		throw new AccesoDatosException("ESTE MÉTODO NO ESTÁ IMPLEMENTADO");
+	}
+
 }
