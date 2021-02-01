@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Sorteos {
 	@Min(1)
-	private Long id;
+	private long id;
 	@Min(1)
 	@Max(50)
 	@NotBlank
-	private Integer num1, num2, num3, num4, num5;
+	private int num1, num2, num3, num4, num5;
 	@Min(1)
 	@Max(12)
 	@NotBlank
-	private Integer star1, star2;
+	private int star1, star2;
 	@NotBlank
 	private Date fechasorteo;
 }

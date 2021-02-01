@@ -68,7 +68,7 @@ public class InterfazGraficaEuromillon{
 	 */
 	private void btnGuardarClick() {
 		int num1, num2, num3, num4, num5, star1, star2;
-		Date fecha = null;
+		Date fecha;
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
 		
 		num1 = Integer.parseInt(Num1.getText());
@@ -80,9 +80,8 @@ public class InterfazGraficaEuromillon{
 		star2 = Integer.parseInt(Star2.getText());
 		
 		try {
-			System.out.println(fecha);
 			fecha = formato.parse(fechasorteo.getText());
-			Sorteos sorteo = new Sorteos(null, num1, num2, num3, num4, num5, star1, star2, fecha);
+			Sorteos sorteo = new Sorteos(0, num1, num2, num3, num4, num5, star1, star2, fecha);
 
 			dao.agregar(sorteo);
 		} catch (Exception e) {
