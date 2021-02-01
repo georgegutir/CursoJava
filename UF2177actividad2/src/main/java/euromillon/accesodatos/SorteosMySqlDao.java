@@ -9,7 +9,9 @@ import euromillon.modelo.Sorteos;
 
 @Repository
 public class SorteosMySqlDao implements Dao<Sorteos>{
+	private String url, usuario, password;
 	
+	private static final SorteosMySqlDao INSTANCIA = new SorteosMySqlDao();
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -37,6 +39,10 @@ public class SorteosMySqlDao implements Dao<Sorteos>{
 	@Override
 	public void borrar(Long id) {
 		jdbcTemplate.update("DELETE FROM dorteos WHERE id = ?", new Object[] { id });	
+	}
+
+	public static SorteosMySqlDao getInstancia() {
+		return INSTANCIA;
 	}
 	
 }
