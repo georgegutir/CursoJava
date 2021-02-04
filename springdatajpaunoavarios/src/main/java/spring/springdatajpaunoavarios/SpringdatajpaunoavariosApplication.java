@@ -10,12 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import spring.springdatajpaunoavarios.entidades.Categoria;
 import spring.springdatajpaunoavarios.entidades.Producto;
+import spring.springdatajpaunoavarios.repositorios.CategoriaDao;
 import spring.springdatajpaunoavarios.repositorios.CategoriaRepository;
+import spring.springdatajpaunoavarios.repositorios.Dao;
 import spring.springdatajpaunoavarios.repositorios.ProductoRepository;
 
 @SpringBootApplication
 public class SpringdatajpaunoavariosApplication implements CommandLineRunner {
+	@Autowired
+	private Dao<Producto> daoProductos;
 
+	@Autowired
+	private CategoriaDao daoCategorias;
+	
 	@Autowired
 	private ProductoRepository productos;
 
@@ -29,9 +36,18 @@ public class SpringdatajpaunoavariosApplication implements CommandLineRunner {
 	@Override
 
 	public void run(String... args) throws Exception {
-		inicializarDatos();
+		System.out.println(daoProductos.obtenerPorId(2L));
 
-		mostrarDatos();
+		Categoria categoria = daoCategorias.obtenerPorIdConProductos(1L);
+
+		System.out.println(categoria);
+
+		for (Producto producto : categoria.getProductos()) {
+			System.out.println(producto);
+		}
+		// inicializarDatos();
+
+		// mostrarDatos();
 	}
 
 	@Transactional
