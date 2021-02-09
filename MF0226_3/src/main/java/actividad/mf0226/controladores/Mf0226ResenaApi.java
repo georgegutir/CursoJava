@@ -46,7 +46,7 @@ public class Mf0226ResenaApi {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Resena post(@RequestBody Resena resena) {
-		LOGGER.log(Level.INFO, resena.toString());
+		//LOGGER.log(Level.INFO, resena.toString());
 		return resenadao.insertar(resena);
 	}
 
