@@ -31,15 +31,14 @@ public class ResenaDaoJdbcTemplate implements ResenaDao {
 
 	@Override
 	public Resena insertar(Resena resena) {
-
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbc.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(
 					"INSERT INTO resena (resenas, alumno_codigo, curso_codigo) VALUES (?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, resena.getResenas());
-			ps.setInt(2, resena.getCurso_codigo());
-			ps.setInt(3, resena.getAlumno_codigo());
+			ps.setInt(2, resena.getAlumno_codigo());
+			ps.setInt(3, resena.getCurso_codigo());
 			return ps;
 		}, keyHolder);
 
