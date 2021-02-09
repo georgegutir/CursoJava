@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: UF2177
+  description: REST para actividad 3 MF0226
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api/'
+    description: Servidor de Spring Boot
+tags:
+  - name: resena
+    description: Reseñas sobre los libros
+  - name: libro
+    description: Libro almacenado
+  - name: autor
+    description: Autor del libro
+paths:
+  '/libros/{id}':
+    get:
+      summary: Obtener un curso por id
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Devuelve el curso cuyo id es el que se ha pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Libro'
+        '404':
+          description: No encontrado
+  /libros:
+    get:
+      operationId: getAll
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Libro'
+    '/{id}/resenas':
+      get:
+      tags:
+        - libro
+      summary: libro con sus reseñas
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: long
+            format: int64
+      responses:
+        '200':
+          description: Obtener un libro por id con todas sus reseñas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Libro'
+        '404':
+          description: No encontrado
+  /Resenas:
+    post:
+      operationId: insert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resena'
+      responses:
+        '201':
+          description: Creado
+        '400':
+           description: Petición incorrecta
+components:
+  requestBodies:    
+    Resenia:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Resena"
+      description: Reseña que se crea en un libro
+      required: true
+  schemas:
+    Libro:
+      type: object
+      properties:
+        id:
+          type: long
+          format: int64
+        nombre:
+          type: string
+        autor:
+          type: string
+    Resena:
+      type: object
+      properties:
+        id:
+          type: long
+          format: int64
+        texto:
+          type: string
+        libros_id:
+          type: long
+          format: int64

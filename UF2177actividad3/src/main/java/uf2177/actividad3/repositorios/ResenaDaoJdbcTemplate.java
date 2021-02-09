@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -17,10 +16,9 @@ public class ResenaDaoJdbcTemplate {
 	@Autowired
 	private JdbcTemplate jdbc;
 	
-	public Resena obtenerPorId(long id) {
-		return jdbc.queryForObject("SELECT * FROM resenas WHERE codigo = ?", new BeanPropertyRowMapper<Resena>(Resena.class), id);
-		
-	}
+	//public Resena obtenerPorId(long id) {
+	//	return (Resena) jdbc.query("SELECT * FROM resenas WHERE id = ?", new BeanPropertyRowMapper<Resena>(Resena.class), id);	
+	//}
 	
 	public Resena insertar(Resena resena) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
