@@ -1,0 +1,207 @@
+openapi: 3.0.1
+info:
+  title: MF0226
+  description: REST para ejercicio global MF0226
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api/'
+    description: Servidor de Spring Boot
+    variables: {}
+tags:
+  - name: resena
+    description: Reseñas sobre los cursos
+  - name: curso
+    description: Cursos sobre los que se crean las reseñas
+  - name: profesor
+    description: Profesors de los cursos
+paths:
+  '/cursos':
+    get:
+      tags:
+        - curso
+      summary: Obtener todos los cursos
+      operationId: getAll
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Devuelve el curso cuyo id es el que se ha pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+        '404':
+          description: No encontrado
+    '/cursos/{codigo}':
+     get:
+      tags:
+        - curso
+      summary: Datos de un curso
+      operationId: getById
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64      
+      responses:
+        '200':
+          description: Obtener un curso por id con todas sus reseñas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+        '404':
+          description: No encontrado
+    
+    '/resenias/{codigo}':
+     get:
+      tags:
+        - curso
+      summary: Datos de una resena
+      operationId: getById
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64      
+      responses:
+        '200':
+          description: Obtener una Reseña por codigo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resena'
+        '404':
+          description: No encontrado
+    
+      put:
+        tags:
+         - resena
+        summary: Modificar una Reseña por id
+        operationId: update
+        parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        responses:
+          '400':
+             description: Petición incorrecta
+          '404':
+             description: No existe Reseña
+          '200':
+             description: Modificado
+             content:
+                application/json:
+                 schema:
+                   $ref: '#/components/schemas/Resena'    
+    delete:
+      operationId: delete
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Sin contenido
+        '404':
+          description: No encontrado
+        
+  /Resena:
+    get:
+      operationId: getAll
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Resena'
+    post:  
+      tags:
+           - resena
+      summary: Crear una nueva Reseña
+      operationId: insert
+      parameters:
+         - in: "body"
+           name: "body"
+           description: "Objeto Resena que se crea en la BB.DD"
+           required: true
+      schema:
+             $ref: "#/components/schemas/Resena"    
+      requestBody:
+           content:
+             application/json:
+                schema:
+                  $ref: '#/components/schemas/Resena'
+      responses:
+           '400':
+              description: Petición incorrecta
+           '201':
+              description: Creado
+              content:
+                 application/json:
+                   schema:
+                     $ref: '#/components/schemas/Resena' 
+components:
+  requestBodies:    
+    schemas:
+    Curso:
+      type: object
+      properties:
+        codigo:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        identificador:
+          type: string
+        nHoras:
+          type: integer
+          format: int64
+        profesor:
+          type: string
+     
+    Profesor:
+      type: object
+      properties:
+        codigo:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        apellidos:
+          type: string
+      
+    Resena:
+      type: object
+      required:
+        - resenas
+      properties:
+        codigo:
+          type: integer
+          format: int64 
+        resenas:
+          type: string
+        curso_codigo:
+          type: integer
+          format: int64 
+        alumno_codigo:
+          type: integer
+          format: int64 
