@@ -14,29 +14,9 @@ tags:
   - name: autor
     description: Autor del libro
 paths:
-  '/libros/{id}':
+  '/libros':
     get:
-      summary: Obtener un curso por id
-      operationId: getById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: Devuelve el curso cuyo id es el que se ha pedido
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Libro'
-        '404':
-          description: No encontrado
-  /libros:
-    get:
-      operationId: getAll
+      operationId: getAll, obtener todos los libros
       responses:
         '200':
           description: 'successful operation'
@@ -46,31 +26,9 @@ paths:
                 type: 'array'
                 items:
                   $ref: '#/components/schemas/Libro'
-    '/{id}/resenas':
-      get:
-      tags:
-        - libro
-      summary: libro con sus reseñas
-      operationId: getById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: long
-            format: int64
-      responses:
-        '200':
-          description: Obtener un libro por id con todas sus reseñas
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Libro'
-        '404':
-          description: No encontrado
-  /Resenas:
+  '/resenas':
     post:
-      operationId: insert
+      operationId: insertar nueva reseña en un libro
       requestBody:
         content:
           application/json:
@@ -81,15 +39,28 @@ paths:
           description: Creado
         '400':
            description: Petición incorrecta
-components:
-  requestBodies:    
-    Resenia:
-      content:
-        application/json:
+    '/resenas/{id}':
+    get:
+      summary: Obtener resenas de un libro por id del libro
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
           schema:
-            $ref: "#/components/schemas/Resena"
-      description: Reseña que se crea en un libro
-      required: true
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Devuelve las resenas del libro cuyo id es el que se ha pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resena'
+        '404':
+          description: No encontrado
+components:
+  
   schemas:
     Libro:
       type: object
