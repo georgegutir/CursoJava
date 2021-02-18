@@ -5,10 +5,12 @@
 <h2>Formulario de usuario</h2>
 
 <form method="post">
+	<input type="hidden" name="id" value="${usuario.id}" />
+	
 	<div class="form-group row">
 		<label for="email" class="col-sm-2 col-form-label">Correo electrónico</label>
 		<div class="col-sm-10">
-			<input type="email" class="form-control" id="email" name="email">
+			<input type="email" class="form-control" id="email" name="email" value="${usuario.email}">
 		</div>
 	</div>
 	<div class="form-group row">
@@ -24,7 +26,7 @@
 				<option value="0">Selecciona un rol</option>
 
 				<c:forEach items="${roles}" var="rol">
-					<option value="${rol.id}">${rol.nombre}: ${rol.descripcion}</option>
+					<option value="${rol.id}" ${rol.id == usuario.rol.id ? 'selected' : '' }>${rol.nombre}: ${rol.descripcion}</option>
 				</c:forEach>
 			</select>
 		</div>
