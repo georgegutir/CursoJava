@@ -52,7 +52,11 @@ public class LoginServlet extends HttpServlet {
 		if (hash.equals(usuario.getPassword())) {
 			request.getSession().setAttribute("usuario", usuario);
 
-			response.sendRedirect(getServletContext().getContextPath() + "/admin/usuarios");
+			if ("ADMIN".equals(usuario.getRol().getNombre())) {
+				response.sendRedirect(request.getContextPath() + "/admin/usuarios");
+			} else {
+				response.sendRedirect(request.getContextPath() + "/");
+			}
 		} else {
 			request.setAttribute("mensaje", "El usuario o la contraseña son incorrectos");
 			request.setAttribute("nivel", "danger");
