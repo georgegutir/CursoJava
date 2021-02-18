@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.usuarioservlets.accesodatos.UsuarioDao;
-import com.ipartek.formacion.usuarioservlets.accesodatos.UsuarioDaoMySql;
+import com.ipartek.formacion.usuarioservlets.controladores.Configuracion;
 
 @WebServlet("/admin/borrar")
 public class UsuariosBorrarAdminServlet extends HttpServlet {
@@ -20,7 +20,7 @@ public class UsuariosBorrarAdminServlet extends HttpServlet {
 
 		Long i = Long.parseLong(id);
 
-		UsuarioDao dao = new UsuarioDaoMySql();
+		UsuarioDao dao = Configuracion.daoUsuario;
 
 		dao.borrar(i);
 
