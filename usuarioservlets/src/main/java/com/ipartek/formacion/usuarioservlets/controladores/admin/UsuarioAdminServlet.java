@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.usuarioservlets.bibliotecas.Password;
 import com.ipartek.formacion.usuarioservlets.controladores.Configuracion;
 import com.ipartek.formacion.usuarioservlets.entidades.Usuario;
 
@@ -32,7 +33,27 @@ public class UsuarioAdminServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String rol = request.getParameter("rol");
+
+		Usuario usuario;
+
+		// TODO añadir borrado por POST
+
+		if (id == null || id.trim().length() == 0 || id.trim().equals("0")) {
+			// Inserción
+			usuario = new Usuario(email, Password.obtenerHash(password), rol);
+
+			Configuracion.daoUsuario.insertar(usuario);
+		} else {
+			usuario = new Usuario(id, email, Password.obtenerHash(password), rol);
+
+			Configuracion.daoUsuario.modificar(usuario);
+		}
+
+		request.getRequestDispatcher("/admin/usuarios").forward(request, response);
 	}
 
 }
