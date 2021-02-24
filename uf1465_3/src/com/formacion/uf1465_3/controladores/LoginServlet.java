@@ -51,8 +51,7 @@ public class LoginServlet extends HttpServlet{
 			request.getSession().setAttribute("usuario", user);
 
 			request.getRequestDispatcher("/WEB-INF/vistas/admin/usuario.jsp").forward(request, response);
-			//response.sendRedirect(getServletContext().getContextPath() + "/admin/usuario");
-			//response.sendRedirect(request.getContextPath() + "/admin/usuario");
+			
 		} else {
 			request.setAttribute("mensaje", "El usuario o la contraseña son incorrectos");
 			request.setAttribute("nivel", "danger");

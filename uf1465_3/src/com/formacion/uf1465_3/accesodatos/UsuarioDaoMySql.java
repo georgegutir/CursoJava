@@ -25,29 +25,7 @@ public class UsuarioDaoMySql implements UsuarioDao{
 			throw new AccesoDatosException("No se ha encontrado el JNDI de usuarioservlets", e);
 		}
 	}
-/**
-	@Override
-	public Iterable<Usuario> obtenerTodos() {
-		try (Connection con = dataSource.getConnection();
-				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery(SQL_SELECT)) {
-			ArrayList<Usuario> usuarios = new ArrayList<>();
-			Usuario usuario;
 
-			while(rs.next()) {
-				usuario = new Usuario(rs.getLong("id"), rs.getString("usuario"), rs.getString("password"));
-
-				usuarios.add(usuario);
-			}
-
-			return usuarios;
-		} catch (SQLException e) {
-			throw new AccesoDatosException("No se han podido obtener todos los registros de usuarios");
-		} catch (Exception e) {
-			throw new AccesoDatosException("ERROR NO ESPERADO: No se han podido obtener todos los registros de usuarios");
-		}
-	}
-**/
 	@Override
 	public Usuario obtenerPorUsuario(String usuario) {
 		try (Connection con = dataSource.getConnection();
