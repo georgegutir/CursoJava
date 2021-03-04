@@ -13,7 +13,7 @@ public class Factura {
 	private String codigo;
 	private LocalDate fecha;
 
-	private Cliente cliente;
+	private Cliente cliente; //1 factura puede tener 1 cliente
 
-	private Set<DetalleFactura> detallesFactura;
+	private Set<DetalleFactura> detallesFactura; //1 cliente puede tener muchas facturas
 }
