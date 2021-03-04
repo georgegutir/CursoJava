@@ -19,5 +19,12 @@ public class CarritoNegocioImpl implements CarritoNegocio {
 		log.info(productos.toString());
 		return productos;
 	}
+	
+	@Override
+	public Producto productoPorId(Long id) {
+		Producto producto = daoProducto.obtenerPorId(id);
+		log.info(producto.toString());
+		return producto;
+	}
 
 }
