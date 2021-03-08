@@ -24,7 +24,6 @@ public class RestauracionServlet extends HttpServlet {
 		try {
 			processComplete = runProcess.waitFor();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 
