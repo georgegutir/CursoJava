@@ -40,6 +40,8 @@ public class CrearFacturaServlet extends HttpServlet {
 		}
 
 		factura.setDetallesFactura(detallesFactura);
+		
+		Config.carritoNegocio.guardarFactura(factura);
 
 		request.setAttribute("factura", factura);
 
