@@ -1,6 +1,7 @@
 package com.ipartek.formacion.ejemplofinal.entidades;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Factura implements Serializable {
 
 	private static final long serialVersionUID = 2396176411731906644L;
+	private static final BigDecimal IVA = new BigDecimal("0.21");
 	
 	private Long id;
 	private String codigo;
@@ -20,4 +22,22 @@ public class Factura implements Serializable {
 	private Cliente cliente; //1 factura puede tener 1 cliente
 
 	private Set<DetalleFactura> detallesFactura; //1 cliente puede tener muchas facturas
+	
+	public BigDecimal getTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+
+		for(DetalleFactura detalle: detallesFactura) {
+			total = total.add(detalle.getTotal());
+		}
+
+		return total;
+	}
+
+	public BigDecimal getIva() {
+		return getTotal().multiply(IVA);
+	}
+
+	public BigDecimal getTotalConIva() {
+		return getTotal().add(getIva());
+	}
 }
