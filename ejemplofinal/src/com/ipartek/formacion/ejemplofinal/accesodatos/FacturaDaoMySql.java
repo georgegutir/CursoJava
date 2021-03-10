@@ -3,12 +3,13 @@ package com.ipartek.formacion.ejemplofinal.accesodatos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.ipartek.formacion.ejemplofinal.entidades.DetalleFactura;
 import com.ipartek.formacion.ejemplofinal.entidades.Factura;
 
-public class FacturaDaoMySql implements Dao<Factura> {
+class FacturaDaoMySql implements Dao<Factura> {
 
 	private static final String SQL_INSERT = "INSERT INTO facturas (clientes_id, codigo, fecha) VALUES (?,?,?)";
 	private static final String SQL_INSERT_DETALLE = "INSERT INTO facturas_has_productos (facturas_id, productos_id, cantidad) VALUES (?,?,?)";
@@ -18,32 +19,39 @@ public class FacturaDaoMySql implements Dao<Factura> {
 		try (Connection con = Config.dataSource.getConnection()) {
 			con.setAutoCommit(false);
 
-			try (PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)){
-				ps.setLong(1, factura.getCliente().getId());
-				ps.setString(2, factura.getCodigo());
-				ps.setObject(3, factura.getFecha());
+			return insertarImpl(factura, con);
+		} catch (Exception e) {
+			throw new AccesoDatosException("Error al insertar la factura " + factura, e);
+		}
+	}
 
-				int num = ps.executeUpdate();
+	private Factura insertarImpl(Factura factura, Connection con) throws SQLException {
+		try (PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)){
+			ps.setLong(1, factura.getCliente().getId());
+			ps.setString(2, factura.getCodigo());
+			ps.setObject(3, factura.getFecha());
 
-				if (num != 1) {
-					throw new AccesoDatosException("Ha habido una incidencia en la inserción de factura: " + num);
-				}
+			int num = ps.executeUpdate();
 
-				ResultSet rs = ps.getGeneratedKeys();
+			if (num != 1) {
+				throw new AccesoDatosException("Ha habido una incidencia en la inserción de factura: " + num);
+			}
 
-				rs.next();
+			ResultSet rs = ps.getGeneratedKeys();
 
-				factura.setId(rs.getLong(1));
+			rs.next();
 
-				try (PreparedStatement pst = con.prepareStatement(SQL_INSERT_DETALLE, Statement.RETURN_GENERATED_KEYS)){
+			factura.setId(rs.getLong(1));
 
-					pst.setLong(1, factura.getId());
+			try (PreparedStatement pst = con.prepareStatement(SQL_INSERT_DETALLE, Statement.RETURN_GENERATED_KEYS)){
 
-					for(DetalleFactura detalle: factura.getDetallesFactura()) {
-						pst.setLong(2, detalle.getProducto().getId());
-						pst.setInt(3, detalle.getCantidad());
+				pst.setLong(1, factura.getId());
 
-						num = pst.executeUpdate();
+				for(DetalleFactura detalle: factura.getDetallesFactura()) {
+					pst.setLong(2, detalle.getProducto().getId());
+					pst.setInt(3, detalle.getCantidad());
+
+					num = pst.executeUpdate();
 
 						if(num != 1) {
 							throw new AccesoDatosException("Ha habido una incidencia en la inserción de un detalle de factura " + detalle);
@@ -58,9 +66,6 @@ public class FacturaDaoMySql implements Dao<Factura> {
 				con.rollback();
 				throw new AccesoDatosException("Se ha hecho rollback", e);
 			}
-		} catch (Exception e) {
-			throw new AccesoDatosException("Error al insertar la factura " + factura, e);
-		}
 	}
 
 }
