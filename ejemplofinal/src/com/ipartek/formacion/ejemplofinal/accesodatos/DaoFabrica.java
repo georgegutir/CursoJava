@@ -10,6 +10,7 @@ public class DaoFabrica {
 	private static final Dao<Producto> daoProducto = new ProductoDaoMySql();
 	private static final DaoFactura daoFactura = new FacturaDaoMySql();
 	private static final Dao<Cliente> daoCliente = new ClienteDaoMySql();
+	private static final DaoUsuario daoUsuario = new UsuarioDaoMySql();
 
 	public static Dao<Producto> getDaoProducto() {
 		return daoProducto;
@@ -21,6 +22,10 @@ public class DaoFabrica {
 	
 	public static Dao<Cliente> getDaoCliente() {
 		return daoCliente;
+	}
+	
+	public static DaoUsuario getDaoUsuario() {
+		return daoUsuario;
 	}
 
 }
