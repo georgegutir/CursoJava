@@ -2,6 +2,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+//http://chuwiki.chuidiang.org/index.php?title=Backup_de_MySQL_con_Java
+
 public class Backup {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		Process p = Runtime.getRuntime()
@@ -14,7 +16,8 @@ public class Backup {
 			while ((leido = is.read(buffer)) > 0) {
 				fos.write(buffer, 0, leido);
 			}
-		}
+			
+		} 
 
 		int processComplete = p.waitFor();
 
