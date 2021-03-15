@@ -26,6 +26,6 @@
 	</tbody>
 </table>
 
-<a class="btn btn-primary" href="cliente">Confirmar compra</a>
+<a class="btn btn-primary" href="confirmar-compra">Confirmar compra</a>
 
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
