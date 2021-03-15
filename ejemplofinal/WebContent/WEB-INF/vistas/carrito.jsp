@@ -3,12 +3,12 @@
 
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
-<table class="table">
+<table class="table table-striped table-bordered table-hover table-sm text-right">
 	<caption>Carrito</caption>
 	<thead>
 		<tr>
 			<th scope="col">Id</th>
-			<th scope="col">Nombre</th>
+			<th scope="col" class="text-left">Nombre</th>
 			<th scope="col">Cantidad</th>
 			<th scope="col">Precio unidad</th>
 		</tr>
@@ -17,9 +17,10 @@
 		<c:forEach items="${carrito.lineas}" var="linea">
 		<tr>
 			<th scope="row">${linea.producto.id}</th>
-			<td>${linea.producto.nombre}</td>
+			<td class="text-left">${linea.producto.nombre}</td>
 			<td>${linea.cantidad}</td>
-			<td>${linea.producto.precio}</td>
+			<td><fmt:formatNumber value="${linea.producto.precio}"
+						type="currency" /></td>
 		</tr>
 		</c:forEach>
 	</tbody>
