@@ -6,6 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Representa las diferentes categorías en las que están repartidos los productos
+ * del supermercado
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Departamento implements Serializable {
 	private static final long serialVersionUID = 7623251760150200816L;

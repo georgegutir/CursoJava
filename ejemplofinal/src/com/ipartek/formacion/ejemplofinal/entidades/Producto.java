@@ -8,6 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Representa los productos que se venden en el supermercado
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Producto implements Serializable {
 	

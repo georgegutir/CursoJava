@@ -9,11 +9,22 @@ import com.ipartek.formacion.ejemplofinal.entidades.Cliente;
 
 import lombok.extern.java.Log;
 
+/**
+ * Representa el acceso a los datos del cliente del supermercado
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @Log
 class ClienteDaoMySql implements Dao<Cliente> {
 
 	private static final String SQL_INSERT = "INSERT INTO clientes (nombre, apellidos, cif, fecha_nacimiento) VALUES (?, ?, ?, ?)";
 
+	/**
+	 * Inserta en la bbdd el nuevo cliente introducido
+	 * @param cliente 
+	 * @return cliente 
+	 */
 	@Override
 	public Cliente insertar(Cliente cliente) {
 		try (Connection con = Config.dataSource.getConnection();

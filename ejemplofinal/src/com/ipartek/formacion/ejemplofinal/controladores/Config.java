@@ -5,6 +5,12 @@ import com.ipartek.formacion.ejemplofinal.logicanegocio.ClienteNegocio;
 import com.ipartek.formacion.ejemplofinal.logicanegocio.FabricaNegocio;
 import com.ipartek.formacion.ejemplofinal.logicanegocio.UsuarioNegocio;
 
+/**
+ * Controlador de configuración de la fábrica
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 class Config {
 	private Config() {}
 

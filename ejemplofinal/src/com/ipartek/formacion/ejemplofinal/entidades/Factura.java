@@ -12,6 +12,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Representa el recibo de la compra realizada
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Factura implements Serializable {
 
@@ -28,6 +34,10 @@ public class Factura implements Serializable {
 	@EqualsAndHashCode.Exclude
 	private Set<DetalleFactura> detallesFactura = new HashSet<>(); //1 cliente puede tener muchas facturas
 	
+	/**
+	 * Calcula el precio total de la compra
+	 * @return precio total de la compra
+	 */
 	public BigDecimal getTotal() {
 		BigDecimal total = BigDecimal.ZERO;
 
@@ -38,10 +48,18 @@ public class Factura implements Serializable {
 		return total;
 	}
 
+	/**
+	 * Calcula y añade el IVA al precio total
+	 * @return precio con el IVA añadido
+	 */
 	public BigDecimal getIva() {
 		return getTotal().multiply(IVA);
 	}
 
+	/**
+	 * Calcula el IVA total
+	 * @return precio total con el IVA añadido
+	 */
 	public BigDecimal getTotalConIva() {
 		return getTotal().add(getIva());
 	}

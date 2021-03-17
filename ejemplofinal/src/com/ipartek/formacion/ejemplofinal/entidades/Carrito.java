@@ -11,14 +11,8 @@ import java.util.TreeMap;
  */
 public class Carrito implements Serializable {
 
-	/**
-	 * Necesario para los elementos Serializables
-	 */
 	private static final long serialVersionUID = -370385928841361725L;
 
-	/**
-	 * Almacenamos las líneas de carrito que contendrán el producto y cantidad
-	 */
 	private TreeMap<Long, DetalleCarrito> lineas = new TreeMap<>();
 
 	/**

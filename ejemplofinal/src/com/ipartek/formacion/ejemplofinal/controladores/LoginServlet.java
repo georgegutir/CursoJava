@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.ipartek.formacion.ejemplofinal.entidades.Alerta;
 import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 
+/**
+ * Controlador para el logueo e inicio de sesión de los usuarios
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

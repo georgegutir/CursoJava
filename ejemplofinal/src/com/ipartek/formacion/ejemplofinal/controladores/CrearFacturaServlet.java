@@ -16,6 +16,12 @@ import com.ipartek.formacion.ejemplofinal.entidades.DetalleFactura;
 import com.ipartek.formacion.ejemplofinal.entidades.Factura;
 import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 
+/**
+ * Controlador que crea la factura de la compra
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @WebServlet("/crear-factura")
 public class CrearFacturaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

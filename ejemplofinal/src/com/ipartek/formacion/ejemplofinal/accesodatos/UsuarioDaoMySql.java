@@ -7,10 +7,21 @@ import java.sql.ResultSet;
 import com.ipartek.formacion.ejemplofinal.entidades.Cliente;
 import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 
+/**
+ * Implementa el acceso a DaoUsuario
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 public class UsuarioDaoMySql implements DaoUsuario {
 
 	private static final String SQL_EMAIL = "SELECT * FROM usuarios u LEFT JOIN clientes c ON u.clientes_id = c.id WHERE email = ?";
 
+	/**
+	 * Buscar en la bbdd y obtener al usuario a través del email introducido
+	 * @param email
+	 * @return usuario
+	 */
 	@Override
 	public Usuario obtenerPorEmail(String email) {
 		try (Connection con = Config.dataSource.getConnection();

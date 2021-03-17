@@ -10,12 +10,23 @@ import java.time.LocalDate;
 import com.ipartek.formacion.ejemplofinal.entidades.DetalleFactura;
 import com.ipartek.formacion.ejemplofinal.entidades.Factura;
 
+/**
+ * Implementa el acceso al DaoFactura
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 class FacturaDaoMySql implements DaoFactura {
 
 	private static final String SQL_INSERT = "INSERT INTO facturas (clientes_id, codigo, fecha) VALUES (?,?,?)";
 	private static final String SQL_INSERT_DETALLE = "INSERT INTO facturas_has_productos (facturas_id, productos_id, cantidad) VALUES (?,?,?)";
 	private static final String SQL_CODIGO = "SELECT MAX(codigo) FROM supermercado.facturas WHERE codigo LIKE CONCAT(?, '____')";
 
+	/**
+	 * Inserta en la bbdd la nueva factura realizada
+	 * @param factura
+	 * @return factura
+	 */
 	@Override
 	public Factura insertar(Factura factura) {
 		try (Connection con = Config.dataSource.getConnection()) {
@@ -70,6 +81,10 @@ class FacturaDaoMySql implements DaoFactura {
 			}
 	}
 	
+	/**
+	 * Obtener el código de la última factura realizada
+	 * @return id
+	 */
 	@Override
 	public String obtenerUltimoCodigo() {
 		try (Connection con = Config.dataSource.getConnection();

@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.ejemplofinal.entidades.Cliente;
 
+/**
+ * Controlador para gestionar y unificar la creación de las facturas con los clientes que realizan la compra 
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @WebServlet("/cliente")
 public class ClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +36,6 @@ public class ClienteServlet extends HttpServlet {
 		String fechaNacimiento = request.getParameter("fecha-nacimiento");
 
 		Cliente cliente = new Cliente(null, nombre, apellidos, cif, LocalDate.parse(fechaNacimiento), null);
-
-		// TODO: Validar cliente
 
 		Config.clienteNegocio.altaCliente(cliente);
 

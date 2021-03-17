@@ -1,23 +1,52 @@
 package com.ipartek.formacion.ejemplofinal.accesodatos;
 
+/**
+ * Coge las excepciones que se pueden encontrar y envía el mensaje
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 public class AccesoDatosException extends RuntimeException {
+	/**
+	 * Constructor
+	 */
 	public AccesoDatosException() {
 		super();
 	}
 
+	/**
+	 * Constructor con parámetros de detalle del mensaje, la causa y supresiones y seguimiento activas o desactivadas
+	 * @param message
+	 * @param cause
+	 * @param enableSuppression
+	 * @param writableStackTrace
+	 */
 	public AccesoDatosException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
+	/**
+	 * Constructor con parámetros de detalle del mensaje y la causa
+	 * @param message
+	 * @param cause
+	 */
 	public AccesoDatosException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Constructor con parámetros de detalle del mensaje
+	 * @param message
+	 */
 	public AccesoDatosException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Constructor con parámetros de causa
+	 * @param cause
+	 */
 	public AccesoDatosException(Throwable cause) {
 		super(cause);
 	}

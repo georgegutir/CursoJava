@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.ipartek.formacion.ejemplofinal.entidades.Cliente;
 import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 
+/**
+ * Controlador para confirmar la compra del carrito asignándosela a dicho cliente y dé paso a la creación
+ * de su respectiva factura
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @WebServlet("/confirmar-compra")
 public class ConfirmarCompraServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
