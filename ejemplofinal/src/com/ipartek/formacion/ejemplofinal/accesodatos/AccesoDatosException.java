@@ -16,10 +16,10 @@ public class AccesoDatosException extends RuntimeException {
 
 	/**
 	 * Constructor con parámetros de detalle del mensaje, la causa y supresiones y seguimiento activas o desactivadas
-	 * @param message
-	 * @param cause
-	 * @param enableSuppression
-	 * @param writableStackTrace
+	 * @param message				mensaje de error
+	 * @param cause					causa del error	
+	 * @param enableSuppression		supresión
+	 * @param writableStackTrace	seguimiento
 	 */
 	public AccesoDatosException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
@@ -28,8 +28,8 @@ public class AccesoDatosException extends RuntimeException {
 
 	/**
 	 * Constructor con parámetros de detalle del mensaje y la causa
-	 * @param message
-	 * @param cause
+	 * @param message	mensaje de error
+	 * @param cause		causa del error
 	 */
 	public AccesoDatosException(String message, Throwable cause) {
 		super(message, cause);
@@ -37,7 +37,7 @@ public class AccesoDatosException extends RuntimeException {
 
 	/**
 	 * Constructor con parámetros de detalle del mensaje
-	 * @param message
+	 * @param message	mensaje de error
 	 */
 	public AccesoDatosException(String message) {
 		super(message);
@@ -45,7 +45,7 @@ public class AccesoDatosException extends RuntimeException {
 
 	/**
 	 * Constructor con parámetros de causa
-	 * @param cause
+	 * @param cause		causa del error
 	 */
 	public AccesoDatosException(Throwable cause) {
 		super(cause);

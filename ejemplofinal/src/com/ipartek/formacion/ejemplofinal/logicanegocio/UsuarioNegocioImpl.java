@@ -16,8 +16,8 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 
 	/**
 	 * Llamada a validar los datos introducidos a ver si existe dicho usuario
-	 * @param usuario
-	 * @return boolean
+	 * @param usuario	usuario que hace login en el supermercado
+	 * @return boolean	true si es cliente y false si no
 	 */
 	@Override
 	public boolean validarUsuario(Usuario usuario) {

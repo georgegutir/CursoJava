@@ -11,7 +11,8 @@ import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 public interface UsuarioNegocio {
 	/**
 	 * Llamada a la validación de usuario
-	 * @param usuario
+	 * @param usuario	usuario que hace login en el supermercado
+	 * @return boolean	true si es cliente y false si no
 	 */
 	boolean validarUsuario(Usuario usuario);
 }

@@ -35,8 +35,8 @@ public class CarritoNegocioImpl implements CarritoNegocio {
 	
 	/**
 	 * Llamada a seleccionar el producto que coincida con el id introducido
-	 * @param id
-	 * @return producto
+	 * @param id	identificador
+	 * @return producto	producto que coincide con id
 	 */
 	@Override
 	public Producto productoPorId(Long id) {
@@ -47,8 +47,8 @@ public class CarritoNegocioImpl implements CarritoNegocio {
 	
 	/**
 	 * Llamada a guardar en la bbdd la nueva factura creada tras la compra del carrito
-	 * @param factura
-	 * @return factura
+	 * @param factura	factura a guardar
+	 * @return factura	factura ya guardada
 	 */
 	@Override
 	public Factura guardarFactura(Factura factura) {

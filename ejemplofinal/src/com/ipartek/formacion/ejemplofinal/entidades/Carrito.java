@@ -17,8 +17,8 @@ public class Carrito implements Serializable {
 
 	/**
 	 * Añade el producto en una cantidad concreta al carrito
-	 * @param producto
-	 * @param cantidad
+	 * @param producto	producto a añadir al carrito
+	 * @param cantidad	cuantas unidades a añadir de dicho producto
 	 */
 	public void addProducto(Producto producto, Integer cantidad) {
 		Long id = producto.getId();

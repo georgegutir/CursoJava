@@ -19,7 +19,7 @@ public class UsuarioDaoMySql implements DaoUsuario {
 
 	/**
 	 * Buscar en la bbdd y obtener al usuario a través del email introducido
-	 * @param email
+	 * @param email correo identificador del usuario
 	 * @return usuario
 	 */
 	@Override

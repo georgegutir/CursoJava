@@ -17,7 +17,7 @@ public class SesionListener implements HttpSessionListener{
 	
 	/**
 	 * Creación de la nueva sesión y asignación del carrito
-	 * @param se
+	 * @param se	evento
 	 */
 	@Override
     public void sessionCreated(HttpSessionEvent se)  { 
@@ -27,7 +27,7 @@ public class SesionListener implements HttpSessionListener{
 
 	/**
 	 * Fin de la sesión iniciada
-	 * @param se
+	 * @param se	evento
 	 */
     @Override
 	public void sessionDestroyed(HttpSessionEvent se)  { 

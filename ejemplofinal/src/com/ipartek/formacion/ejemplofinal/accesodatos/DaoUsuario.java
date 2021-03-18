@@ -11,7 +11,8 @@ import com.ipartek.formacion.ejemplofinal.entidades.Usuario;
 public interface DaoUsuario extends Dao<Usuario>{
 	/**
 	 * Buscar y obtener al usuario buscado a través del email introducido
-	 * @param email
+	 * @param email correo identificador del usuario
+	 * @return email que coincide
 	 */
 	Usuario obtenerPorEmail(String email);
 }

@@ -12,7 +12,8 @@ public interface ClienteNegocio {
 
 	/**
 	 * Llamada a dar de alta un nuevo cliente
-	 * @param cliente
+	 * @param cliente	cliente a dar de alta
+	 * @return cliente	cliente guardado
 	 */
 	Cliente altaCliente(Cliente cliente);
 }

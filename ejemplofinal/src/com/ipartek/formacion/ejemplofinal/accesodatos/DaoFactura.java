@@ -12,6 +12,7 @@ public interface DaoFactura extends Dao<Factura> {
 
 	/**
 	 * Método para obtener el último código creado en una factura
+	 * @return ultimo código de factura encontrado
 	 */
 	String obtenerUltimoCodigo();
 }

@@ -18,8 +18,8 @@ public class ClienteNegocioImpl implements ClienteNegocio {
 
 	/**
 	 * Llamada a dar de alta un nuevo cliente
-	 * @param cliente
-	 * @return cliente
+	 * @param cliente	Cliente a guardar en la bbdd
+	 * @return cliente	Cliente guardado
 	 */
 	@Override
 	public Cliente altaCliente(Cliente cliente) {
