@@ -34,7 +34,7 @@ public interface Dao<T> {
 	default T insertar(T objeto) {
 		throw new AccesoDatosException("NO IMPLEMENTADO");
 	}
-
+	
 	/**
 	 * Método para la modificación de un objeto
 	 * @param objeto	objeto ya existente con los nuevos datos a modificar
@@ -51,4 +51,5 @@ public interface Dao<T> {
 	default void borrar(Long id) {
 		throw new AccesoDatosException("NO IMPLEMENTADO");
 	}
+
 }
