@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.ipartek.formacion.mf0223.accesodatos.PlatoDaoMySql;
 import com.ipartek.formacion.mf0223.entidades.Plato;
 
+/**
+ * Controlador que muestra la lista de todos los platos de la bbdd
+ * 
+ * @author Jorge Gutierrez
+ * @version 1.0
+ */
 @WebServlet("/listado")
 public class ListadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -1,5 +1,7 @@
 package com.ipartek.formacion.mf0223.entidades;
 
+import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,6 @@ import lombok.NoArgsConstructor;
 public class Procedencia {
 	private Long id;
 	private String nombre;
+	
+	private Set<Plato> plato;
 }

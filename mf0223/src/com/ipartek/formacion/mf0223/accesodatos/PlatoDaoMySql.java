@@ -18,7 +18,7 @@ import com.ipartek.formacion.mf0223.entidades.Procedencia;
  * @version 1.0
  */
 public class PlatoDaoMySql implements Dao<Plato>{
-	private static final String SQL_SELECT = "SELECT p.id AS id, p.nombre AS nombre, p.calorias AS calorias, c.nombre AS categoria, pr.nombre AS procedencia\r\n"
+	private static final String SQL_SELECT = "SELECT p.id AS id, p.nombre AS nombre, p.calorias AS calorias, c.id, c.nombre AS categoria, pr.id, pr.nombre AS procedencia\r\n"
 			+ "FROM plato p JOIN categoria c ON p.categoria_id = c.id\r\n"
 			+ "JOIN procedencia pr ON p.procedencia_id = pr.id";
 	private static final String SQL_INSERT = "INSERT INTO plato (nombre, calorias, categoria_id, procedencia_id) VALUES (?, ?, ?, ?)";
@@ -31,7 +31,7 @@ public class PlatoDaoMySql implements Dao<Plato>{
 	public Iterable<Plato> obtenerTodos() {
 		try (Connection con = Config.dataSource.getConnection();
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery(SQL_SELECT + " ORDER BY p.id ASC")) {
+				ResultSet rs = st.executeQuery(SQL_SELECT + " ORDER BY c.id ASC")) {
 			ArrayList<Plato> platos = new ArrayList<>();
 
 			Plato plato;
@@ -39,10 +39,11 @@ public class PlatoDaoMySql implements Dao<Plato>{
 			Procedencia procedencia;
 
 			while (rs.next()) {
-				categoria = new Categoria(rs.getLong("c.id"), rs.getString("c.nombre"));
-				procedencia = new Procedencia(rs.getLong("p.id"), rs.getString("o.nombre"));
+				categoria = new Categoria(rs.getLong("c.id"), rs.getString("categoria"), null);
+				procedencia = new Procedencia(rs.getLong("pr.id"), rs.getString("procedencia"), null);
 
 				plato = new Plato(rs.getLong("id"), rs.getString("nombre"), rs.getInt("calorias"), categoria, procedencia);
+				
 				platos.add(plato);
 			}
 			return platos;
