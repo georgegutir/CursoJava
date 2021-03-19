@@ -56,7 +56,7 @@ public class RestauracionServlet extends HttpServlet {
 			int processComplete = runProcess.waitFor();
 			if(processComplete == 0) {
 				System.out.println("Restaurado correctamente");
-				request.getRequestDispatcher(Config.PATH_VISTAS + "listado.jsp").forward(request, response);
+				request.getRequestDispatcher(Config.PATH_VISTAS + "menu.jsp").forward(request, response);
 			}else {
 				System.out.println("Ha habido algún error");
 				doGet(request, response);

@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.mf0223.accesodatos.PlatoDaoMySql;
+import com.ipartek.formacion.mf0223.entidades.Alerta;
 import com.ipartek.formacion.mf0223.entidades.Categoria;
 import com.ipartek.formacion.mf0223.entidades.Plato;
+import com.ipartek.formacion.mf0223.entidades.Procedencia;
 
 /**
  * Controlador que guarda un nuevo plato en la bbdd
@@ -23,6 +26,12 @@ public class InsertarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Iterable<Categoria> categoria= Config.categoriaNegocio.listadoCategoria();
+		request.setAttribute("categorias",categoria);	
+		
+		Iterable<Procedencia> procedencia = Config.procedenciaNegocio.listadoProcedencia();		
+		
+		request.setAttribute("origenes",procedencia);
 		request.getRequestDispatcher(Config.PATH_VISTAS + "insertar.jsp").forward(request, response);
 	}
 
@@ -33,63 +42,38 @@ public class InsertarServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// 1. Recoger información de la petición
-		String sId = request.getParameter("id");
+		String numId = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String calorias = request.getParameter("calorias");
-
-		String categoriaId = request.getParameter("categoria"); // Categoría
-		String procedenciaId = request.getParameter("procedencia"); // Origen
+		String catId = request.getParameter("categoria");
+		String procId = request.getParameter("procedencia"); 
 
 		// 2. Poner información dentro de un modelo
-		Plato plato = new Plato(sId, nombre, calorias);
+		Long IdLong = Long.parseLong(numId);
+		int calInt = Integer.parseInt(calorias);
+		Long catIdLong = Long.parseLong(catId);
+		Long procIdLong = Long.parseLong(procId);
+		
+		Plato plato = new Plato(IdLong, nombre, calInt, null, null);
 
-		Long categoriaIdLong = Long.parseLong(categoriaId);
-		Long origenIdLong = Long.parseLong(procedenciaId);
-
-		plato.setCategoria(new Categoria(categoriaIdLong, null));
-		plato.setOrigen(new Origen(origenIdLong, null));
-
-		log.info(plato.toString());
-
-		if (!plato.isCorrecto()) {
-			// 4. Generar modelo para la vista
-			if (plato.getId() == null) {
-				request.setAttribute("accion", "Nuevo ");
-			} else {
-				request.setAttribute("accion", "Edición de ");
-			}
-
-			request.setAttribute("plato", plato);
-
-			request.setAttribute("categorias", Config.categoriaNegocio.listadoCategorias());
-			request.setAttribute("origenes", Config.origenNegocio.listadoOrigenes());
-
-			// 5. Redirigir a otra vista
-			request.getRequestDispatcher(Config.PATH_VISTAS + "plato.jsp").forward(request, response);
-			return;
-		}
+		plato.setCategoria(new Categoria(catIdLong, null, null));
+		plato.setProcedencia(new Procedencia(procIdLong, null, null));
+		
+		System.out.println(plato);
 
 		// 3. Tomar decisiones según lo recibido
 		String texto;
+		PlatoDaoMySql dao = new PlatoDaoMySql();
+		dao.insertar(plato);
 
-		if (plato.getId() == null) {
-			// Si no está rellenado el id, es que queremos añadir
-			Config.platoNegocio.insertarPlato(plato);
-
-			texto = "Se ha creado el plato correctamente";
-		} else {
-			// Si está rellenado el id, es que queremos modificar
-			Config.platoNegocio.modificarPlato(plato);
-
-			texto = "Se ha modificado el plato correctamente";
-		}
-
+		texto = "Se ha creado el plato correctamente";
+	
 		// 4. Generar modelo para la vista
 		Alerta alerta = new Alerta("success", texto);
 		request.setAttribute("alerta", alerta);
 
 		// 5. Redirigir a otra vista
-		request.getRequestDispatcher("/index").forward(request, response);
+		request.getRequestDispatcher("/listado").forward(request, response);
 	}
 
 }

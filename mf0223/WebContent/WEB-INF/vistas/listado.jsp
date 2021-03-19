@@ -3,12 +3,11 @@
 <%@ include file="/WEB-INF/vistas/includes/cabecera.jsp"%>
 
 <br />
-<h2>MENÚ</h2>
+<h2>LISTADO DE PLATOS</h2>
 <br />
-<form action="listado" method="post">
+<form action="listado" method="get">
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover table-sm">
-			<caption>Platos</caption>
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Id</th>
@@ -31,8 +30,10 @@
 			</tbody>
 		</table>
 		
-		<button type="submit" class="btn btn-primary">Insertar nuevo plato</button>
+		<a class="btn btn-primary" href="insertar">Insertar nuevo plato</a>
+		<a class="btn btn-primary" onclick="history.back()">Volver</a>
 	<br />
 	</div>
 </form>
+<br />
 <%@ include file="/WEB-INF/vistas/includes/pie.jsp"%>
