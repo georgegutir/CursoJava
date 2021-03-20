@@ -54,7 +54,7 @@ public class PlatoDaoMySql implements Dao<Plato>{
 
 	/**
 	 * Inserta en la bbdd el nuevo plato introducido
-	 * @param plato 
+	 * @param plato 	plato que se va insertar
 	 * @return plato 
 	 */
 	@Override

@@ -36,18 +36,18 @@ public class RestauracionServlet extends HttpServlet {
 		String uploadPath = getServletContext().getRealPath("") + File.separator + Config.UPLOAD_DIRECTORY;
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) uploadDir.mkdir();
-		
+
 		String archivo = null;
-		
+
 		for (Part part : request.getParts()) {
 		    archivo = part.getSubmittedFileName();
-		    
+
 		    if(archivo != null && archivo.trim().length() > 0) {
 			    part.write(uploadPath + File.separator + archivo);
 			    break;
 		    }
 		}
-		
+
 		String restoreCmd = "mysql -uroot -e \"source " + uploadPath + File.separator + archivo + "\"";
 		System.out.println(archivo);
 		System.out.println(restoreCmd);
@@ -56,7 +56,7 @@ public class RestauracionServlet extends HttpServlet {
 			int processComplete = runProcess.waitFor();
 			if(processComplete == 0) {
 				System.out.println("Restaurado correctamente");
-				request.getRequestDispatcher(Config.PATH_VISTAS + "menu.jsp").forward(request, response);
+				request.getRequestDispatcher(Config.PATH_VISTAS + "listado.jsp").forward(request, response);
 			}else {
 				System.out.println("Ha habido algún error");
 				doGet(request, response);

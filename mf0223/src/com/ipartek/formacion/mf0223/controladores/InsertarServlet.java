@@ -1,6 +1,7 @@
 package com.ipartek.formacion.mf0223.controladores;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,50 +27,45 @@ public class InsertarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Iterable<Categoria> categoria= Config.categoriaNegocio.listadoCategoria();
-		request.setAttribute("categorias",categoria);	
+		Iterable<Categoria> categorias= Config.categoriaNegocio.listadoCategorias();
+		request.setAttribute("categorias", categorias);	
 		
-		Iterable<Procedencia> procedencia = Config.procedenciaNegocio.listadoProcedencia();		
+		Iterable<Procedencia> procedencias= Config.procedenciaNegocio.listadoProcedencia();
+		request.setAttribute("procedencias", procedencias);
 		
-		request.setAttribute("origenes",procedencia);
 		request.getRequestDispatcher(Config.PATH_VISTAS + "insertar.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
 
 		// 1. Recoger información de la petición
-		String numId = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String calorias = request.getParameter("calorias");
-		String catId = request.getParameter("categoria");
-		String procId = request.getParameter("procedencia"); 
+		String cat = request.getParameter("categoria");
+		String proc = request.getParameter("procedencia"); 
 
-		// 2. Poner información dentro de un modelo
-		Long IdLong = Long.parseLong(numId);
 		int calInt = Integer.parseInt(calorias);
-		Long catIdLong = Long.parseLong(catId);
-		Long procIdLong = Long.parseLong(procId);
+		Long catId = Long.parseLong(cat);
+		Long procId = Long.parseLong(proc);
 		
-		Plato plato = new Plato(IdLong, nombre, calInt, null, null);
+		// 2. Poner información dentro de un modelo
+		Plato plato = new Plato(1L, nombre, calInt, null, null);
 
-		plato.setCategoria(new Categoria(catIdLong, null, null));
-		plato.setProcedencia(new Procedencia(procIdLong, null, null));
-		
-		System.out.println(plato);
+		plato.setCategoria(new Categoria(catId, null, null));
+		plato.setProcedencia(new Procedencia(procId, null, null));
 
 		// 3. Tomar decisiones según lo recibido
-		String texto;
+		String mensaje;
 		PlatoDaoMySql dao = new PlatoDaoMySql();
 		dao.insertar(plato);
 
-		texto = "Se ha creado el plato correctamente";
+		mensaje = "Plato creado correctamente";
 	
 		// 4. Generar modelo para la vista
-		Alerta alerta = new Alerta("success", texto);
+		Alerta alerta = new Alerta("success", mensaje);
 		request.setAttribute("alerta", alerta);
 
 		// 5. Redirigir a otra vista

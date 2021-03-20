@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
  */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Plato {
-	
 	private long id;
 	private String nombre;
 	private int calorias;

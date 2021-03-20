@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
  */
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Alerta implements Serializable {
-
 	private static final long serialVersionUID = 4718434984524239877L;
 
 	private String nivel;

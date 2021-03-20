@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.ipartek.formacion.mf0223.accesodatos"},{"l":"com.ipartek.formacion.mf0223.controladores"},{"l":"com.ipartek.formacion.mf0223.entidades"},{"l":"com.ipartek.formacion.mf0223.logicanegocio"}];updateSearchResults();
