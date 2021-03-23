@@ -10,12 +10,15 @@ import lombok.NoArgsConstructor;
  * @author Jorge Gutierrez
  * @version 1.0
  */
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plato {
 	private long id;
 	private String nombre;
 	private int calorias;
-	
+
 	private Categoria categoria;
 	private Procedencia procedencia;
+
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.formacion.mf0223.accesodatos.PlatoDaoMySql;
 import com.ipartek.formacion.mf0223.entidades.Alerta;
 import com.ipartek.formacion.mf0223.entidades.Categoria;
 import com.ipartek.formacion.mf0223.entidades.Plato;
@@ -41,7 +40,6 @@ public class InsertarServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		// 1. Recoger información de la petición
 		String nombre = request.getParameter("nombre");
 		String calorias = request.getParameter("calorias");
 		String cat = request.getParameter("categoria");
@@ -51,25 +49,19 @@ public class InsertarServlet extends HttpServlet {
 		Long catId = Long.parseLong(cat);
 		Long procId = Long.parseLong(proc);
 		
-		// 2. Poner información dentro de un modelo
 		Plato plato = new Plato(1L, nombre, calInt, null, null);
 
 		plato.setCategoria(new Categoria(catId, null, null));
 		plato.setProcedencia(new Procedencia(procId, null, null));
 
-		// 3. Tomar decisiones según lo recibido
-		String mensaje;
-		PlatoDaoMySql dao = new PlatoDaoMySql();
-		dao.insertar(plato);
+		try {
+			Config.platoNegocio.insertarPlato(plato);
+			request.getSession().setAttribute("alerta", new Alerta("success", "Plato guardado correctamente"));
+		} catch (Exception e) {
+			request.setAttribute("alerta", new Alerta("danger", "No se ha podido agregar el nuevo plato"));
+		}
 
-		mensaje = "Plato creado correctamente";
-	
-		// 4. Generar modelo para la vista
-		Alerta alerta = new Alerta("success", mensaje);
-		request.setAttribute("alerta", alerta);
-
-		// 5. Redirigir a otra vista
-		request.getRequestDispatcher("/listado").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/listado");
 	}
 
 }

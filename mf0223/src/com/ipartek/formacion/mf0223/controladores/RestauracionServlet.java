@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.ipartek.formacion.mf0223.entidades.Alerta;
+
 /**
  * Controlador que se encarga de cargar la bbdd desde el fichero seleccionado
  * 
@@ -54,15 +56,18 @@ public class RestauracionServlet extends HttpServlet {
 		try {
 			Process runProcess = Runtime.getRuntime().exec(restoreCmd);
 			int processComplete = runProcess.waitFor();
-			if(processComplete == 0) {
+			if(processComplete == 1) {
 				System.out.println("Restaurado correctamente");
-				request.getRequestDispatcher(Config.PATH_VISTAS + "listado.jsp").forward(request, response);
+				request.getSession().setAttribute("alerta", new Alerta("success", "BBDD restaurada correctamente"));
+				request.getRequestDispatcher(Config.PATH_VISTAS + "menu.jsp").forward(request, response);
 			}else {
 				System.out.println("Ha habido algún error");
+				request.setAttribute("alerta", new Alerta("danger", "Ha habido algún error al cargar la bbdd"));
 				doGet(request, response);
 			}
 		} catch (InterruptedException e) {		
 			System.out.println("Proceso no completado");
+			request.setAttribute("alerta", new Alerta("danger", "Proceso no completado"));
 			doGet(request, response);
 		}		
 	}

@@ -43,19 +43,22 @@
 					<li class="nav-item active"><a class="nav-link" href="listado">Listado
 							<span class="sr-only">(current)</span></a>
 					</li>
+					<li class="nav-item active"><a class="nav-link" href="insertar">Insertar
+							<span class="sr-only">(current)</span></a>
+					</li>
 				</ul>
 			</div>
 		</nav>
 		<c:if test="${alerta != null}">
-		<div class="alert alert-${alerta.nivel} alert-dismissible fade show"
-				role="alert">
-				${alerta.mensaje}
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-		</div>
-		<% session.removeAttribute("alerta"); %>
+			<div class="alert alert-${alerta.nivel} alert-dismissible fade show"
+					role="alert">
+					${alerta.mensaje}
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+			</div>
+			<%session.removeAttribute("alerta");%>
 		</c:if>
 	</header>
 	<main class="container"> 
