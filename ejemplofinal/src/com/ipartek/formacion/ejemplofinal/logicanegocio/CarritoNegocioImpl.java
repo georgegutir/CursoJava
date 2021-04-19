@@ -52,7 +52,7 @@ public class CarritoNegocioImpl implements CarritoNegocio {
 	 */
 	@Override
 	public Factura guardarFactura(Factura factura) {
-		String codigo = "20210002"; // daoFactura.obtenerUltimoCodigo(); //20210001
+		String codigo = daoFactura.obtenerUltimoCodigo(); //20210001
 		String nuevoCodigo = aumentarCodigo(codigo);
 		factura.setCodigo(nuevoCodigo);
 		log.info(factura.toString());

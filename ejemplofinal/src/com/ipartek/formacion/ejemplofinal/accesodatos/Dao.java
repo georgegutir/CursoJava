@@ -52,4 +52,6 @@ public interface Dao<T> {
 		throw new AccesoDatosException("NO IMPLEMENTADO");
 	}
 
+	String obtenerUltimoCodigo();
+
 }

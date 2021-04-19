@@ -86,4 +86,10 @@ class ProductoDaoMySql implements Dao<Producto> {
 		return producto;
 	}
 
+	@Override
+	public String obtenerUltimoCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

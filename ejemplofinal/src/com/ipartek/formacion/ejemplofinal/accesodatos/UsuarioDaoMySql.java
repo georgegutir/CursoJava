@@ -44,4 +44,10 @@ public class UsuarioDaoMySql implements DaoUsuario {
 		}
 	}
 
+	@Override
+	public String obtenerUltimoCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

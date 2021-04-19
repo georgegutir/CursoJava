@@ -55,4 +55,10 @@ class ClienteDaoMySql implements Dao<Cliente> {
 		}
 	}
 
+	@Override
+	public String obtenerUltimoCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
